@@ -1,49 +1,125 @@
 {
-  "$schema": "https://api.archbee.com/git-config-schema",
   "docsPath": "docs/",
   "structure": {
-    "assets": "assets",
     "summary": "GENERAL/summary.md",
+    "assets": "assets",
     "docsTree": [
       {
-        "group": "GENERAL",
-        "pages": [
-          "GENERAL/introduction.md",
-          "GENERAL/getting-started.md",
-          "GENERAL/ALL BLOCKS.md",
-          "GENERAL/summary.md"
+        "categoryName": "GENERAL",
+        "isCategory": true,
+        "children": [
+          {
+            "path": "GENERAL/summary.md",
+            "children": []
+          },
+          {
+            "path": "GENERAL/introduction.md",
+            "children": []
+          },
+          {
+            "path": "GENERAL/getting-started.md",
+            "children": []
+          },
+          {
+            "path": "GENERAL/ALL BLOCKS.md",
+            "children": []
+          }
         ]
       },
       {
-        "group": "LISTS",
-        "pages": [
-          "LISTS/bulleted-advanced.md",
-          "LISTS/bulleted-scenarios.md",
-          "LISTS/checklist-advanced.md",
-          "LISTS/checklist-scenarios.md",
-          "LISTS/numbered-advanced.md",
-          "LISTS/numbered-scenarios.md"
+        "categoryName": "LISTS",
+        "isCategory": true,
+        "children": [
+          {
+            "path": "LISTS/bulleted-advanced.md",
+            "children": []
+          },
+          {
+            "path": "LISTS/bulleted-scenarios.md",
+            "children": []
+          },
+          {
+            "path": "LISTS/checklist-advanced.md",
+            "children": []
+          },
+          {
+            "path": "LISTS/checklist-scenarios.md",
+            "children": []
+          },
+          {
+            "path": "LISTS/numbered-advanced.md",
+            "children": []
+          },
+          {
+            "path": "LISTS/numbered-scenarios.md",
+            "children": []
+          }
         ]
       },
       {
-        "group": "SCENARIOS",
-        "pages": [
-          "SCENARIOS/checklist-scenarios.md",
-          "SCENARIOS/cta-scenarios.md",
-          "SCENARIOS/droplist-scenarios.md",
-          "SCENARIOS/heading-scenarios.md",
-          "SCENARIOS/hint-scenarios.md",
-          "SCENARIOS/linkarray-scenarios.md",
-          "SCENARIOS/list-scenarios.md",
-          "SCENARIOS/new-list.md",
-          "SCENARIOS/new-table.md",
-          "SCENARIOS/split-scenarios.md",
-          "SCENARIOS/table-scenarios.md",
-          "SCENARIOS/table.md",
-          "SCENARIOS/tabs-scenarios.md",
-          "SCENARIOS/workflow-scenarios.md"
+        "categoryName": "SCENARIOS",
+        "isCategory": true,
+        "children": [
+          {
+            "path": "SCENARIOS/checklist-scenarios.md",
+            "children": []
+          },
+          {
+            "path": "SCENARIOS/cta-scenarios.md",
+            "children": []
+          },
+          {
+            "path": "SCENARIOS/droplist-scenarios.md",
+            "children": []
+          },
+          {
+            "path": "SCENARIOS/heading-scenarios.md",
+            "children": []
+          },
+          {
+            "path": "SCENARIOS/hint-scenarios.md",
+            "children": []
+          },
+          {
+            "path": "SCENARIOS/linkarray-scenarios.md",
+            "children": []
+          },
+          {
+            "path": "SCENARIOS/list-scenarios.md",
+            "children": []
+          },
+          {
+            "path": "SCENARIOS/new-list.md",
+            "children": []
+          },
+          {
+            "path": "SCENARIOS/new-table.md",
+            "children": []
+          },
+          {
+            "path": "SCENARIOS/split-scenarios.md",
+            "children": []
+          },
+          {
+            "path": "SCENARIOS/table-scenarios.md",
+            "children": []
+          },
+          {
+            "path": "SCENARIOS/table.md",
+            "children": []
+          },
+          {
+            "path": "SCENARIOS/tabs-scenarios.md",
+            "children": []
+          },
+          {
+            "path": "SCENARIOS/workflow-scenarios.md",
+            "children": []
+          }
         ]
       }
     ]
-  }
+  },
+  "shadowDocs": [],
+  "isMain": true
 }
