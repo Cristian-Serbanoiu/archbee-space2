@@ -7,7 +7,6 @@
       {
         "categoryName": "GENERAL",
         "isCategory": true,
-        "path": "GENERAL",
         "children": [
           {
             "path": "GENERAL/summary.md",
@@ -35,20 +34,6 @@
         "categoryName": "LISTS",
         "isCategory": true,
         "children": [
-          {
-            "path": "LISTS/aatrox-guide.md",
-            "children": [
-              {
-                "path": "LISTS/aatrox-abilities.md",
-                "children": [
-                  {
-                    "path": "archbee-doc-43vC3WvGDlb79ryPtSxEe.md",
-                    "children": []
-                  }
-                ]
-              }
-            ]
-          },
           {
             "path": "LISTS/bulleted-advanced.md",
             "children": []
