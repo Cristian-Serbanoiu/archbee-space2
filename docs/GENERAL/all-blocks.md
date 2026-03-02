@@ -1,11 +1,11 @@
 ---
-title: ALL BLOCKS
+title: All blocks
 slug: all-blocks
 createdAt: 2025-01-27T10:00:00.000Z
 updatedAt: 2025-01-27T10:00:00.000Z
 ---
 
-# ALL BLOCKS
+# All blocks
 
 # Heading 1
 

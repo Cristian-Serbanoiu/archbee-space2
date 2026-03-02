@@ -32,10 +32,3 @@ Unleashes the Darkin form: gains movement speed, increased self-healing, and rev
 ## Quick combo
 
 Q1 → E (reposition for sweet spot) → W → Q2 → Q3. Use R before or during the engage for healing and resets.
-
-SADSA
-DASD
-ASDSA
-DSA
-D
-ASD
