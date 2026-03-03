@@ -10,7 +10,12 @@
         "children": [
           {
             "path": "GENERAL/getting-started.md",
-            "children": []
+            "children": [],
+            "isHidden": false,
+            "isLink": true,
+            "linkTitle": "Getting started guide",
+            "linkHref": "https://docs.archbee.com/getting-started",
+            "linkOpensInNewTab": true
           },
           {
             "path": "GENERAL/summary.md",
@@ -31,7 +36,8 @@
           },
           {
             "path": "GENERAL/quick-reference.md",
-            "children": []
+            "children": [],
+            "isHidden": true
           }
         ]
       },
@@ -75,11 +81,21 @@
           },
           {
             "path": "LISTS/aatrox-guide.md",
-            "children": []
+            "children": [],
+            "isHidden": true,
+            "isLink": true,
+            "linkTitle": "Aatrox guide (external)",
+            "linkHref": "https://www.leagueoflegends.com",
+            "linkOpensInNewTab": true
           },
           {
             "path": "LISTS/bulleted-advanced.md",
-            "children": []
+            "children": [],
+            "isHidden": false,
+            "isLink": true,
+            "linkTitle": "Bulleted lists — advanced",
+            "linkHref": "https://docs.archbee.com/blocks/bulleted",
+            "linkOpensInNewTab": true
           },
           {
             "path": "LISTS/bulleted-scenarios.md",
@@ -91,7 +107,8 @@
           },
           {
             "path": "LISTS/checklist-scenarios.md",
-            "children": []
+            "children": [],
+            "isHidden": true
           },
           {
             "path": "LISTS/numbered-advanced.md",
@@ -109,7 +126,12 @@
         "children": [
           {
             "path": "GENERAL/all-blocks.md",
-            "children": []
+            "children": [],
+            "isHidden": false,
+            "isLink": true,
+            "linkTitle": "All blocks reference",
+            "linkHref": "https://docs.archbee.com/blocks",
+            "linkOpensInNewTab": true
           },
           {
             "path": "SCENARIOS/checklist-scenarios.md",
@@ -129,7 +151,8 @@
           },
           {
             "path": "SCENARIOS/hint-scenarios.md",
-            "children": []
+            "children": [],
+            "isHidden": true
           },
           {
             "path": "SCENARIOS/linkarray-scenarios.md",
@@ -165,7 +188,12 @@
           },
           {
             "path": "SCENARIOS/workflow-scenarios.md",
-            "children": []
+            "children": [],
+            "isHidden": false,
+            "isLink": true,
+            "linkTitle": "Workflow block docs",
+            "linkHref": "https://docs.archbee.com/blocks/workflow",
+            "linkOpensInNewTab": true
           }
         ]
       },
