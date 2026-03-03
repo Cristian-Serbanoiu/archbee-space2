@@ -9,23 +9,28 @@
         "isCategory": true,
         "children": [
           {
-            "path": "GENERAL/summary.md",
-            "children": []
-          },
-          {
-            "path": "GENERAL/introduction.md",
-            "children": []
-          },
-          {
             "path": "GENERAL/getting-started.md",
             "children": []
           },
           {
-            "path": "GENERAL/all-blocks.md",
-            "children": []
+            "path": "GENERAL/summary.md",
+            "children": [],
+            "isLink": true,
+            "linkTitle": "DOCS.ARCHBEE.COM",
+            "linkHref": "www.archbee.com",
+            "linkOpensInNewTab": true
+          },
+          {
+            "path": "GENERAL/introduction.md",
+            "children": [],
+            "isHidden": false
           },
           {
             "path": "GENERAL/quick-reference.md",
+            "children": []
+          },
+          {
+            "path": "GENERAL/all-blocks.md",
             "children": []
           }
         ]

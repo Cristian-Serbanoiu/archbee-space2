@@ -1,9 +1,4 @@
----
-title: Introduction to the Project
-slug: introduction
-createdAt: 2025-01-27T10:00:00.000Z
-updatedAt: 2025-01-27T10:00:00.000Z
----
+# Introduction to the Project
 
 # Introduction to the Project
 
@@ -15,6 +10,8 @@ This guide will walk you through setting up, configuring, and using our tool/pla
 
 \[Your Project Name] is a powerful tool designed to **streamline your workflow** by automating \[briefly describe the core function].
 
+Test
+
 ### Key Features
 
 - 🚀 **High Performance:** Built for speed and efficiency.
@@ -25,15 +22,7 @@ To begin, head over to the [**Getting Started Guide**]().
 
 # HEADING
 
-<table isTableHeaderOn="true" columnWidths="[object Object]">
-  <tr>
-    <td>
-    </td>
-    <td>
-    </td>
-    <td>
-    </td>
-  </tr>
+<table isTableHeaderOn="true" columnWidths="220,220,221">
   <tr>
     <td>
     </td>
@@ -59,6 +48,4 @@ To begin, head over to the [**Getting Started Guide**]().
     </td>
   </tr>
 </table>
-
-
 
