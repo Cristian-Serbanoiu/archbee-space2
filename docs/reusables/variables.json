@@ -1,0 +1,12 @@
+{
+  "PRODUCT_02": {
+    "contentVariableId": "6cn_azHtT7WBdGIkkOCyD",
+    "name": "PRODUCT_02",
+    "content": "THIS IS VISIBLE IN DOMAIN - QA",
+    "scope": "global",
+    "spaceTargetMap": {
+      "D-eBm6el43L6cykIoltA_": "THIS IS VISIBLE IN DOMAIN - QA3"
+    },
+    "type": "variable"
+  }
+}
