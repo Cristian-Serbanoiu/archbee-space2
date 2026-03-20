@@ -1,6 +1,7 @@
 ---
 title: ADVANCED NUMBERED SCENARIOS
 slug: numbered-advanced
+docTags: Revenge
 createdAt: 2025-01-27T10:00:00.000Z
 updatedAt: 2025-01-27T10:00:00.000Z
 ---

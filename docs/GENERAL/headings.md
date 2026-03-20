@@ -1,8 +1,7 @@
 ---
 title: Headings
-slug: IOQV-untitled
-docTags: 
-createdAt: Tue Jan 13 2026 09:03:32 GMT+0000 (Coordinated Universal Time)
+slug: headings
+docTags: BogBee
 updatedAt: Fri Mar 20 2026 14:25:25 GMT+0000 (Coordinated Universal Time)
 ---
 

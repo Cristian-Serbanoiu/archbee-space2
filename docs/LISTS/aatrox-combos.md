@@ -1,3 +1,9 @@
+---
+title: Aatrox combos
+slug: aatrox-combos
+docTags: BogBee
+---
+
 # Aatrox combos
 
 Core sequences to get the most out of Aatrox's kit.

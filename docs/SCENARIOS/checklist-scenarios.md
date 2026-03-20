@@ -1,8 +1,7 @@
 ---
 title: CHECKLIST SCENARIOS
 slug: checklist-scenarios
-docTags: 
-createdAt: Fri Mar 20 2026 09:04:33 GMT+0000 (Coordinated Universal Time)
+docTags: BogBee
 updatedAt: Fri Mar 20 2026 09:20:14 GMT+0000 (Coordinated Universal Time)
 ---
 

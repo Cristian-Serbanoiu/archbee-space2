@@ -1,9 +1,9 @@
 ---
-title: GLOSSARY TERMS
-slug: glossary-cristi-terms
+title: Glossary Terms
+slug: glossary-terms
 description: THIS IS THE DESCRIPTION
 image: https://archbee-image-uploads-qa.s3.amazonaws.com/-ojPTDCxvH0gZVunvkOhv/yzQBF35mg9KrlDllw05ua_cat-sa-mai-duc.png
-docTags: BogBee,Fangg19,Ochanissi,Revenge
+docTags: Fangg19
 createdAt: Fri Mar 20 2026 14:25:24 GMT+0000 (Coordinated Universal Time)
 updatedAt: Fri Mar 20 2026 14:31:12 GMT+0000 (Coordinated Universal Time)
 ---

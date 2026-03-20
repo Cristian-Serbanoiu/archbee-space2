@@ -1,3 +1,9 @@
+---
+title: Aatrox counters
+slug: aatrox-counters
+docTags: BogBee
+---
+
 # Aatrox counters
 
 Champions and tools that make life hard for the Darkin Blade.

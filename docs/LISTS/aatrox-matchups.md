@@ -1,3 +1,9 @@
+---
+title: Aatrox matchups
+slug: aatrox-matchups
+docTags: BogBee
+---
+
 # Aatrox matchups
 
 How Aatrox fares in lane and when to pick him.

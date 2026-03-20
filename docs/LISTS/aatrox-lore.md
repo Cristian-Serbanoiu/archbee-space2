@@ -1,3 +1,9 @@
+---
+title: Aatrox lore
+slug: aatrox-lore
+docTags: BogBee
+---
+
 # Aatrox lore
 
 Aatrox is a **Darkin**: an ancient, corrupted Shuriman Ascended trapped inside his own weapon. He seeks to destroy all life so that his imprisonment might finally end.

@@ -1,3 +1,9 @@
+---
+title: Aatrox build
+slug: aatrox-build
+docTags: Fangg19
+---
+
 # Aatrox build
 
 Recommended items and runes for the Darkin Blade.

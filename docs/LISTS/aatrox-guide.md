@@ -1,6 +1,7 @@
 ---
 title: Aatrox — The Darkin Blade
 slug: aatrox-guide
+docTags: Fangg19
 createdAt: 2025-01-27T10:00:00.000Z
 updatedAt: 2025-01-27T10:00:00.000Z
 ---

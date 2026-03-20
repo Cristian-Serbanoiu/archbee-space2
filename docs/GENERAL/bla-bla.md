@@ -1,9 +1,9 @@
 ---
 title: bla bla
-slug: url-bla-bla
+slug: bla-bla
 description: THIS IS THE DESCRIPTION
 image: https://archbee-image-uploads-qa.s3.amazonaws.com/-ojPTDCxvH0gZVunvkOhv/yzQBF35mg9KrlDllw05ua_cat-sa-mai-duc.png
-docTags: Revenge
+docTags: Fangg19
 createdAt: Fri Mar 20 2026 14:25:23 GMT+0000 (Coordinated Universal Time)
 updatedAt: Fri Mar 20 2026 14:30:52 GMT+0000 (Coordinated Universal Time)
 ---

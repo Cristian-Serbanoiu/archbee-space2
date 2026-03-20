@@ -1,3 +1,9 @@
+---
+title: Aatrox synergies
+slug: aatrox-synergies
+docTags: BogBee
+---
+
 # Aatrox synergies
 
 Champions and comps that work well with Aatrox.

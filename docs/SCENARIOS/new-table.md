@@ -1,6 +1,7 @@
 ---
 title: TABLE SCENARIOS (NEW)
 slug: new-table
+docTags: Ochanissi
 createdAt: 2025-01-27T10:00:00.000Z
 updatedAt: 2025-01-27T10:00:00.000Z
 ---

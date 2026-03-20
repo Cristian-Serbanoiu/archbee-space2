@@ -9,11 +9,11 @@
         "isCategory": true,
         "children": [
           {
-            "path": "GENERAL/v-9b-glossary-terms.md",
+            "path": "GENERAL/glossary-terms.md",
             "children": []
           },
           {
-            "path": "GENERAL/url-bla-bla.md",
+            "path": "GENERAL/bla-bla.md",
             "children": []
           },
           {
@@ -46,6 +46,19 @@
             "path": "GENERAL/quick-reference.md",
             "children": [],
             "isHidden": true
+          },
+          {
+            "path": "GENERAL/all-blocks.md",
+            "children": [],
+            "isHidden": false,
+            "isLink": true,
+            "linkTitle": "All blocks reference",
+            "linkHref": "https://docs.archbee.com/blocks",
+            "linkOpensInNewTab": true
+          },
+          {
+            "path": "GENERAL/headings.md",
+            "children": []
           }
         ]
       },
@@ -57,13 +70,13 @@
             "path": "LISTS/aatrox-abilities.md",
             "children": [
               {
-                "path": "LISTS/archbee-doc-mcwuXQrgA9-JTEz47Ubt4.md",
+                "path": "LISTS/aatrox-lore.md",
                 "children": [
                   {
-                    "path": "LISTS/archbee-doc-T4SBNvZJKKu3DFn_GUFRI.md",
+                    "path": "LISTS/aatrox-build.md",
                     "children": [
                       {
-                        "path": "LISTS/archbee-doc-wJQh7ipWV3RwUJUivtFuA.md",
+                        "path": "LISTS/aatrox-combos.md",
                         "children": [
                           {
                             "path": "LISTS/aatrox-matchups.md",
@@ -101,7 +114,7 @@
             "children": [],
             "isHidden": false,
             "isLink": true,
-            "linkTitle": "Bulleted lists — advanced",
+            "linkTitle": "Bulleted lists \u2014 advanced",
             "linkHref": "https://docs.archbee.com/blocks/bulleted",
             "linkOpensInNewTab": true
           },
@@ -132,15 +145,6 @@
         "categoryName": "SCENARIOS",
         "isCategory": true,
         "children": [
-          {
-            "path": "GENERAL/all-blocks.md",
-            "children": [],
-            "isHidden": false,
-            "isLink": true,
-            "linkTitle": "All blocks reference",
-            "linkHref": "https://docs.archbee.com/blocks",
-            "linkOpensInNewTab": true
-          },
           {
             "path": "SCENARIOS/checklist-scenarios.md",
             "children": []

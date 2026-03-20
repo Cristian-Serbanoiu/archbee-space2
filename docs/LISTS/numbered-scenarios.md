@@ -1,6 +1,7 @@
 ---
 title: NUMBERED LIST SCENARIOS
 slug: numbered-scenarios
+docTags: BogBee
 createdAt: 2025-01-27T10:00:00.000Z
 updatedAt: 2025-01-27T10:00:00.000Z
 ---
