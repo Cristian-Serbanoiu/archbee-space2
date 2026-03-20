@@ -1,12 +1,11 @@
 ---
 title: GLOSSARY TERMS
 slug: glossary-cristi-terms
-seo:
 description: THIS IS THE DESCRIPTION
 image: https://archbee-image-uploads-qa.s3.amazonaws.com/-ojPTDCxvH0gZVunvkOhv/yzQBF35mg9KrlDllw05ua_cat-sa-mai-duc.png
-docTags: 
-createdAt: Fri Mar 20 2026 09:47:38 GMT+0000 (Coordinated Universal Time)
-updatedAt: Fri Mar 20 2026 14:22:16 GMT+0000 (Coordinated Universal Time)
+docTags: BogBee,Fangg19,Ochanissi,Revenge
+createdAt: Fri Mar 20 2026 14:25:24 GMT+0000 (Coordinated Universal Time)
+updatedAt: Fri Mar 20 2026 14:31:12 GMT+0000 (Coordinated Universal Time)
 ---
 
 GLOSSARY 1: \{\{GLOSSARY-TERM-1}}&#x20;
