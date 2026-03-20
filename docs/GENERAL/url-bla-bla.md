@@ -1,6 +1,9 @@
 ---
 title: bla bla
 slug: url-bla-bla
+seo:
+description: THIS IS THE DESCRIPTION
+image: https://archbee-image-uploads-qa.s3.amazonaws.com/-ojPTDCxvH0gZVunvkOhv/yzQBF35mg9KrlDllw05ua_cat-sa-mai-duc.png
 docTags: Revenge
 createdAt: Fri Mar 20 2026 09:04:33 GMT+0000 (Coordinated Universal Time)
 updatedAt: Fri Mar 20 2026 09:08:04 GMT+0000 (Coordinated Universal Time)

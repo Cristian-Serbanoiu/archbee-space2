@@ -1,6 +1,9 @@
 ---
 title: Setup Guide — Getting Started
 slug: getting-started
+seo:
+description: THIS IS THE DESCRIPTION
+image: https://archbee-image-uploads-qa.s3.amazonaws.com/-ojPTDCxvH0gZVunvkOhv/yzQBF35mg9KrlDllw05ua_cat-sa-mai-duc.png
 createdAt: 2025-01-27T10:00:00.000Z
 updatedAt: 2025-01-27T10:00:00.000Z
 ---

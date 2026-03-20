@@ -1,3 +1,11 @@
+---
+title: Introduction to the Project
+slug: introduction-to-the-project
+seo:
+description: THIS IS THE DESCRIPTION
+image: https://archbee-image-uploads-qa.s3.amazonaws.com/-ojPTDCxvH0gZVunvkOhv/yzQBF35mg9KrlDllw05ua_cat-sa-mai-duc.png
+---
+
 # Introduction to the Project
 
 # Introduction to the Project
