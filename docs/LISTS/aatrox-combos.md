@@ -1,6 +1,7 @@
 ---
 title: Aatrox combos
 slug: aatrox-combos
+icon: {"faIcon":"fa-solid fa-file-lines"}
 docTags: BogBee
 ---
 

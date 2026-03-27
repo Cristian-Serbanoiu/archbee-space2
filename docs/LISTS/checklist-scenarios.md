@@ -1,7 +1,7 @@
 ---
 title: CHECKLIST SCENARIOS
 slug: checklist-scenarios
-icon: {"lucideIcon":"AArrowDown"}
+icon: {"apiMethod":"DELETE"}
 docTags: Fangg19
 createdAt: Fri Mar 20 2026 15:37:59 GMT+0000 (Coordinated Universal Time)
 updatedAt: Fri Mar 27 2026 10:50:56 GMT+0000 (Coordinated Universal Time)

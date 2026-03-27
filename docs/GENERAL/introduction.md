@@ -1,6 +1,7 @@
 ---
 title: Introduction to the Project
 slug: introduction-to-the-project
+icon: {"lucideIcon":"BookOpen"}
 docTags: Revenge
 seo:
 description: THIS IS THE DESCRIPTION

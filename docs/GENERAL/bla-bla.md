@@ -1,6 +1,7 @@
 ---
 title: bla bla
 slug: bla-bla
+icon: {"lucideIcon":"BookOpen"}
 description: THIS IS THE DESCRIPTION
 image: https://archbee-image-uploads-qa.s3.amazonaws.com/-ojPTDCxvH0gZVunvkOhv/yzQBF35mg9KrlDllw05ua_cat-sa-mai-duc.png
 docTags: Fangg19

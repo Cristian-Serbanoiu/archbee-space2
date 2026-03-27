@@ -1,6 +1,7 @@
 ---
 title: Aatrox counters
 slug: aatrox-counters
+icon: {"apiMethod":"PATCH"}
 docTags: BogBee
 ---
 

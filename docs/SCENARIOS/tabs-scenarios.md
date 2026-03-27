@@ -1,6 +1,7 @@
 ---
 title: TABS SCENARIOS
 slug: tabs-scenarios
+icon: {"apiMethod":"PATCH"}
 docTags: Revenge
 createdAt: 2025-01-27T10:00:00.000Z
 updatedAt: 2025-01-27T10:00:00.000Z

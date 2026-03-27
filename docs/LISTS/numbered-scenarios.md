@@ -1,7 +1,7 @@
 ---
 title: NUMBERED LIST SCENARIOS
 slug: numbered-scenarios
-icon: {"apiMethod":"GET"}
+icon: {"faIcon":"fa-solid fa-list-ol"}
 docTags: BogBee
 createdAt: Fri Mar 20 2026 15:37:59 GMT+0000 (Coordinated Universal Time)
 updatedAt: Fri Mar 27 2026 10:44:49 GMT+0000 (Coordinated Universal Time)

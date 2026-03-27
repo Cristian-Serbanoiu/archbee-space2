@@ -1,6 +1,7 @@
 ---
 title: HEADING SCENARIOS
 slug: heading-scenarios
+icon: {"faIcon":"fa-solid fa-file-lines"}
 docTags: Fangg19
 createdAt: 2025-01-27T10:00:00.000Z
 updatedAt: 2025-01-27T10:00:00.000Z

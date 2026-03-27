@@ -1,6 +1,7 @@
 ---
 title: Aatrox build
 slug: aatrox-build
+icon: {"lucideIcon":"BookOpen"}
 docTags: Fangg19
 ---
 

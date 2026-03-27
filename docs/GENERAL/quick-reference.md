@@ -1,6 +1,7 @@
 ---
 title: Quick Reference
 slug: quick-reference
+icon: {"faIcon":"fa-solid fa-file-lines"}
 description: THIS IS THE DESCRIPTION
 image: https://archbee-image-uploads-qa.s3.amazonaws.com/-ojPTDCxvH0gZVunvkOhv/yzQBF35mg9KrlDllw05ua_cat-sa-mai-duc.png
 docTags: Fangg19

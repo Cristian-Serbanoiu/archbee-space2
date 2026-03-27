@@ -1,6 +1,7 @@
 ---
 title: CHECKLIST SCENARIOS
 slug: checklist-scenarios
+icon: {"apiMethod":"PATCH"}
 docTags: BogBee
 updatedAt: Fri Mar 20 2026 09:20:14 GMT+0000 (Coordinated Universal Time)
 ---

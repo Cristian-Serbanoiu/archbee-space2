@@ -1,6 +1,7 @@
 ---
 title: All blocks
 slug: all-blocks
+icon: 🧭
 docTags: Ochanissi
 seo:
 description: THIS IS THE DESCRIPTION

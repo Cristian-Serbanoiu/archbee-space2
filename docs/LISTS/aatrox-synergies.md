@@ -1,6 +1,7 @@
 ---
 title: Aatrox synergies
 slug: aatrox-synergies
+icon: {"apiMethod":"PATCH"}
 docTags: BogBee
 ---
 

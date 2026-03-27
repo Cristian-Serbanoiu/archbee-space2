@@ -1,6 +1,7 @@
 ---
 title: Aatrox lore
 slug: aatrox-lore
+icon: {"lucideIcon":"BookOpen"}
 docTags: BogBee
 ---
 

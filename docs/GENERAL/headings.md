@@ -1,6 +1,7 @@
 ---
 title: Headings
 slug: headings
+icon: 🧭
 docTags: BogBee
 createdAt: Fri Mar 20 2026 15:37:58 GMT+0000 (Coordinated Universal Time)
 updatedAt: Thu Mar 26 2026 13:11:03 GMT+0000 (Coordinated Universal Time)

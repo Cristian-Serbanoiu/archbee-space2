@@ -1,6 +1,7 @@
 ---
 title: Documentation Summary
 slug: summary
+icon: {"apiMethod":"PATCH"}
 docTags: Revenge
 seo:
 description: THIS IS THE DESCRIPTION

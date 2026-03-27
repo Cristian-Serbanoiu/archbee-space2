@@ -1,6 +1,7 @@
 ---
 title: Roadmap Constraints and Risks
 slug: roadmap-constraints-and-risks
+icon: {"lucideIcon":"BookOpen"}
 docTags: ListLab
 createdAt: 2026-03-25T00:00:00.000Z
 updatedAt: 2026-03-25T00:00:00.000Z

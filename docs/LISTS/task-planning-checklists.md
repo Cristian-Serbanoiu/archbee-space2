@@ -1,6 +1,7 @@
 ---
 title: Task Planning Checklists
 slug: task-planning-checklists
+icon: {"faIcon":"fa-solid fa-file-lines"}
 docTags: ListLab
 createdAt: 2026-03-25T00:00:00.000Z
 updatedAt: 2026-03-25T00:00:00.000Z

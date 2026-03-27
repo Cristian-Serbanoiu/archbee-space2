@@ -1,6 +1,7 @@
 ---
 title: Setup Guide — Getting Started
 slug: getting-started
+icon: {"faIcon":"fa-solid fa-file-lines"}
 docTags: BogBee
 seo:
 description: THIS IS THE DESCRIPTION

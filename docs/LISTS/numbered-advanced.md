@@ -1,7 +1,7 @@
 ---
 title: ADVANCED NUMBERED SCENARIOS
 slug: numbered-advanced
-icon: {"faIcon":"fa-brands fa-adversal"}
+icon: {"lucideIcon":"ListOrdered"}
 docTags: Revenge
 createdAt: Fri Mar 20 2026 15:37:58 GMT+0000 (Coordinated Universal Time)
 updatedAt: Fri Mar 27 2026 10:51:06 GMT+0000 (Coordinated Universal Time)

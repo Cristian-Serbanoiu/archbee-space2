@@ -1,6 +1,7 @@
 ---
 title: Format Stress Tests
 slug: format-stress-tests
+icon: 🧭
 docTags: ListLab
 createdAt: 2026-03-25T00:00:00.000Z
 updatedAt: 2026-03-25T00:00:00.000Z

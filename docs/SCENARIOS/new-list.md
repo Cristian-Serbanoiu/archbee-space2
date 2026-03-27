@@ -1,6 +1,7 @@
 ---
 title: LIST SCENARIOS NEW
 slug: list-scenarios-new
+icon: {"faIcon":"fa-solid fa-file-lines"}
 docTags: BogBee
 createdAt: 2025-01-28T10:00:00.000Z
 updatedAt: 2025-01-28T10:00:00.000Z

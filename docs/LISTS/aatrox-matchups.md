@@ -1,6 +1,7 @@
 ---
 title: Aatrox matchups
 slug: aatrox-matchups
+icon: {"faIcon":"fa-solid fa-file-lines"}
 docTags: BogBee
 ---
 

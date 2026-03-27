@@ -1,6 +1,7 @@
 ---
 title: ADVANCED BULLETED SCENARIOS
 slug: bulleted-advanced
+icon: 🧭
 docTags: BogBee
 createdAt: 2025-01-27T10:00:00.000Z
 updatedAt: 2025-01-27T10:00:00.000Z
