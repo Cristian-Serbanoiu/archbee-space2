@@ -1,9 +1,10 @@
 ---
 title: ADVANCED NUMBERED SCENARIOS
 slug: numbered-advanced
+icon: {"faIcon":"fa-brands fa-adversal"}
 docTags: Revenge
-createdAt: 2025-01-27T10:00:00.000Z
-updatedAt: 2025-01-27T10:00:00.000Z
+createdAt: Fri Mar 20 2026 15:37:58 GMT+0000 (Coordinated Universal Time)
+updatedAt: Fri Mar 27 2026 10:51:06 GMT+0000 (Coordinated Universal Time)
 ---
 
 # 🔢 ULTRA-NESTED NUMBERED SCENARIOS
@@ -11,6 +12,7 @@ updatedAt: 2025-01-27T10:00:00.000Z
 ## 🚀 NASA MISSION PROTOCOL
 
 ### MARS ROVER DEPLOYMENT
+
 1. **PRE-LAUNCH SEQUENCE**
    1. **ROCKET PREPARATION**
       1. **FUEL LOADING**
@@ -45,37 +47,35 @@ updatedAt: 2025-01-27T10:00:00.000Z
 All fuel systems must maintain cryogenic temperatures. Any temperature deviation requires immediate abort.
 :::
 
-   2. **PAYLOAD INTEGRATION**
-      1. **ROVER PREPARATION**
-         1. **SYSTEMS CHECK**
-            1. **COMMUNICATION**
-               1. **UHF ANTENNA**
-                  1. **DEPLOYMENT TEST: PASSED**
-                  2. **SIGNAL STRENGTH: OPTIMAL**
-                  3. **FREQUENCY: 401.5 MHz**
-                  4. **BACKUP SYSTEM: READY**
-               2. **X-BAND ANTENNA**
-                  1. **HIGH-GAIN ANTENNA**
-                  2. **LOW-GAIN ANTENNA**
-                  3. **SIGNAL PROCESSING**
-                  4. **ERROR CORRECTION**
-            2. **POWER SYSTEMS**
-               1. **SOLAR ARRAYS**
-                  1. **DEPLOYMENT MECHANISM**
-                  2. **POWER OUTPUT: 140W**
-                  3. **EFFICIENCY: 28%**
-                  4. **BACKUP BATTERIES**
-               2. **RADIOISOTOPE GENERATOR**
-                  1. **THERMAL POWER: 110W**
-                  2. **ELECTRICAL POWER: 100W**
-                  3. **FUEL PELLETS: 4.8 kg**
-                  4. **LIFETIME: 14 YEARS**
+2. **PAYLOAD INTEGRATION**
+   1. **ROVER PREPARATION**
+      1. **SYSTEMS CHECK**
+         1. **COMMUNICATION**
+            1. **UHF ANTENNA**
+               1. **DEPLOYMENT TEST: PASSED**
+               2. **SIGNAL STRENGTH: OPTIMAL**
+               3. **FREQUENCY: 401.5 MHz**
+               4. **BACKUP SYSTEM: READY**
+            2. **X-BAND ANTENNA**
+               1. **HIGH-GAIN ANTENNA**
+               2. **LOW-GAIN ANTENNA**
+               3. **SIGNAL PROCESSING**
+               4. **ERROR CORRECTION**
+         2. **POWER SYSTEMS**
+            1. **SOLAR ARRAYS**
+               1. **DEPLOYMENT MECHANISM**
+               2. **POWER OUTPUT: 140W**
+               3. **EFFICIENCY: 28%**
+               4. **BACKUP BATTERIES**
+            2. **RADIOISOTOPE GENERATOR**
+               1. **THERMAL POWER: 110W**
+               2. **ELECTRICAL POWER: 100W**
+               3. **FUEL PELLETS: 4.8 kg**
+               4. **LIFETIME: 14 YEARS**
 
 :::CtaButton{label="🛰️ INITIATE ROVER DEPLOYMENT" docId="mars-mission" docAnchorId="deployment" externalHref="https://nasa.gov/rover-deployment" openInNewTab="true" noFollow="false"}
-
 **MISSION CRITICAL**
 Rover deployment sequence requires ground control authorization
-
 :::
 
 2. **LAUNCH SEQUENCE**
@@ -86,7 +86,7 @@ Rover deployment sequence requires ground control authorization
                1. **PITCH CONTROL: ±5°**
                2. **YAW CONTROL: ±5°**
                3. **ROLL CONTROL: ±5°**
-               4. **RESPONSE TIME: <100ms**
+               4. **RESPONSE TIME: \<100ms**
             2. **NAVIGATION SYSTEMS**
                1. **INERTIAL GUIDANCE**
                2. **GPS BACKUP**
@@ -111,8 +111,8 @@ Rover deployment sequence requires ground control authorization
             4. **MISSION CONTROL**
          2. **WEATHER VERIFICATION**
             1. **WIND CONDITIONS**
-               1. **SURFACE WIND: <30 mph**
-               2. **UPPER LEVEL WIND: <50 mph**
+               1. **SURFACE WIND: \<30 mph**
+               2. **UPPER LEVEL WIND: \<50 mph**
                3. **SHEAR CONDITIONS: NOMINAL**
                4. **TURBULENCE: MINIMAL**
             2. **PRECIPITATION**
@@ -130,6 +130,7 @@ All systems green. Weather conditions favorable. Proceeding with launch sequence
 ## 🏥 COMPLEX SURGICAL PROCEDURE
 
 ### CARDIAC SURGERY PROTOCOL
+
 1. **PRE-OPERATIVE PREPARATION**
    1. **PATIENT ASSESSMENT**
       1. **CARDIAC EVALUATION**
@@ -234,15 +235,14 @@ Patient requires careful hemodynamic monitoring during induction due to cardiac 
             4. **CARDIOPLEGIA ADMINISTRATION**
 
 :::CtaButton{label="❤️ INITIATE CARDIOPLEGIA" docId="cardiac-surgery" docAnchorId="cardioplegia" externalHref="https://hospital.com/cardioplegia-protocol" openInNewTab="false" noFollow="false"}
-
 **CARDIOPLEGIA ADMINISTRATION**
 Begin myocardial protection protocol
-
 :::
 
 ## 🎮 GAME DEVELOPMENT PIPELINE
 
 ### AAA GAME PRODUCTION
+
 1. **PRE-PRODUCTION PHASE**
    1. **CONCEPT DEVELOPMENT**
       1. **GAME DESIGN DOCUMENT**
@@ -357,8 +357,7 @@ Focus on player agency and meaningful choices. Every system should enhance the c
                   4. **DYNAMIC MATERIALS**
 
 :::CtaButton{label="🎨 EXPORT TO GAME ENGINE" docId="asset-pipeline" docAnchorId="export" externalHref="https://game-studio.com/asset-export" openInNewTab="true" noFollow="false"}
-
 **ASSET EXPORT**
 Generate optimized assets for game engine integration
-
 :::
+

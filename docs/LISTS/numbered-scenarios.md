@@ -1,9 +1,10 @@
 ---
 title: NUMBERED LIST SCENARIOS
 slug: numbered-scenarios
+icon: {"apiMethod":"GET"}
 docTags: BogBee
-createdAt: 2025-01-27T10:00:00.000Z
-updatedAt: 2025-01-27T10:00:00.000Z
+createdAt: Fri Mar 20 2026 15:37:59 GMT+0000 (Coordinated Universal Time)
+updatedAt: Fri Mar 27 2026 10:44:49 GMT+0000 (Coordinated Universal Time)
 ---
 
 # NUMBERED LIST SCENARIOS
@@ -13,8 +14,6 @@ updatedAt: 2025-01-27T10:00:00.000Z
 # sadsadsa
 
 # sadsdsadas
-
-
 
 ## 🚀 SOFTWARE DEVELOPMENT LIFECYCLE
 
