@@ -9,6 +9,10 @@
         "isCategory": true,
         "children": [
           {
+            "path": "GENERAL/inline-tex.mdx",
+            "children": []
+          },
+          {
             "path": "GENERAL/glossary-terms.md",
             "children": []
           },
