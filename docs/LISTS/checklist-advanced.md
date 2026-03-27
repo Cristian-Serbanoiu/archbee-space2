@@ -1,9 +1,10 @@
 ---
 title: ADVANCED CHECKLIST SCENARIOS
 slug: checklist-advanced
+icon: 😀
 docTags: Ochanissi
-createdAt: 2025-01-27T10:00:00.000Z
-updatedAt: 2025-01-27T10:00:00.000Z
+createdAt: Fri Mar 20 2026 15:37:58 GMT+0000 (Coordinated Universal Time)
+updatedAt: Fri Mar 27 2026 10:50:50 GMT+0000 (Coordinated Universal Time)
 ---
 
 # ADVANCED CHECKLIST SCENARIOS
