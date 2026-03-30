@@ -26,38 +26,31 @@
         "children": [
           {
             "path": "BASIC/heading-expandable-blocks.md",
-            "children": [],
-            "name": "Headings & Expandable Headings"
+            "children": []
           },
           {
             "path": "BASIC/checklist-list-blocks.md",
-            "children": [],
-            "name": "Checklists & Lists"
+            "children": []
           },
           {
             "path": "BASIC/table-divider-blocks.md",
-            "children": [],
-            "name": "Tables & Dividers"
+            "children": []
           },
           {
             "path": "BASIC/buttons-callouts-blocks.md",
-            "children": [],
-            "name": "Buttons & Callouts"
+            "children": []
           },
           {
             "path": "BASIC/vertical-split-blocks.md",
-            "name": "Vertical Splits & Minitasker",
             "children": []
           },
           {
             "path": "BASIC/link-grid-block.md",
-            "children": [],
-            "name": "Link Grids"
+            "children": []
           },
           {
             "path": "BASIC/workflow-tabs-blocks.md",
-            "children": [],
-            "name": "Workflows & Tabs"
+            "children": []
           }
         ]
       },
@@ -67,18 +60,15 @@
         "children": [
           {
             "path": "MEDIA/file-block.md",
-            "name": "Files",
             "children": []
           },
           {
             "path": "MEDIA/images-embeds-blocks.md",
-            "children": [],
-            "name": "Images & YouTube Videos"
+            "children": []
           },
           {
             "path": "MEDIA/map-block.md",
-            "children": [],
-            "name": "Maps"
+            "children": []
           }
         ]
       },
@@ -88,43 +78,35 @@
         "children": [
           {
             "path": "DEVELOPER/api-endpoint-block.md",
-            "children": [],
-            "name": "API Endpoint"
+            "children": []
           },
           {
             "path": "DEVELOPER/swagger-block.md",
-            "children": [],
-            "name": "Swagger"
+            "children": []
           },
           {
             "path": "DEVELOPER/scalar-block.md",
-            "children": [],
-            "name": "Scalar"
+            "children": []
           },
           {
             "path": "DEVELOPER/graphql-block.md",
-            "children": [],
-            "name": "GraphQL"
+            "children": []
           },
           {
             "path": "DEVELOPER/code-drawer-block.md",
-            "children": [],
-            "name": "Code Drawer"
+            "children": []
           },
           {
             "path": "DEVELOPER/code-editor-block.md",
-            "children": [],
-            "name": "Code Editor"
+            "children": []
           },
           {
             "path": "DEVELOPER/tex-mermaid-blocks.md",
-            "children": [],
-            "name": "TeX & Mermaid"
+            "children": []
           },
           {
             "path": "DEVELOPER/changelog-block.md",
-            "children": [],
-            "name": "Changelog"
+            "children": []
           }
         ]
       },
