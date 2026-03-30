@@ -1,248 +1,60 @@
 {
   "name": "Revenge",
+  "template": "stripe",
+  "contentLayout": "two-column",
+  "publicTheme": "light",
+  "faviconURL": "/public/favicon.ico",
+  "publicLogoURL": "/public/logo-light.png",
+  "darkPublicLogoURL": "/public/logo-dark.png",
+  "hostingColor": "red",
+  "darkHostingColor": "red",
+  "showReadTime": true,
+  "showLastUpdate": true,
+  "showThemeSwitcher": true,
+  "showDocNavigationButtons": true,
+  "hasPrimaryColorLinks": true,
+  "isArchbeeBrandVisible": true,
+  "isPublicBackgroundEnabled": true,
   "docsPath": "docs/",
   "structure": {
-    "summary": "GENERAL/summary.md",
+    "summary": "ALL-BLOCKS/heading-expandable-blocks.md",
     "assets": "assets",
     "docsTree": [
       {
-        "categoryName": "GENERAL",
+        "categoryName": "ALL-BLOCKS",
         "isCategory": true,
         "children": [
           {
-            "path": "GENERAL/inline-tex.mdx",
+            "path": "ALL-BLOCKS/heading-expandable-blocks.md",
             "children": []
           },
           {
-            "path": "GENERAL/glossary-terms.md",
+            "path": "ALL-BLOCKS/checklist-list-blocks.md",
             "children": []
           },
           {
-            "path": "GENERAL/bla-bla.md",
+            "path": "ALL-BLOCKS/table-divider-blocks.md",
             "children": []
           },
           {
-            "path": "GENERAL/getting-started.md",
-            "children": [],
-            "isHidden": false,
-            "isLink": true,
-            "linkTitle": "Getting started guide",
-            "linkHref": "https://docs.archbee.com/getting-started",
-            "linkOpensInNewTab": true
-          },
-          {
-            "path": "GENERAL/summary.md",
-            "children": [],
-            "isHidden": true,
-            "isLink": true,
-            "linkTitle": "DOCS.ARCHBEE.COM",
-            "linkHref": "www.archbee.com",
-            "linkOpensInNewTab": true
-          },
-          {
-            "path": "GENERAL/introduction.md",
-            "children": [],
-            "isHidden": false,
-            "isLink": true,
-            "linkTitle": "Introduction to the Project",
-            "linkHref": ""
-          },
-          {
-            "path": "GENERAL/quick-reference.md",
-            "children": [],
-            "isHidden": true
-          },
-          {
-            "path": "GENERAL/all-blocks.md",
-            "children": [],
-            "isHidden": false,
-            "isLink": true,
-            "linkTitle": "All blocks reference",
-            "linkHref": "https://docs.archbee.com/blocks",
-            "linkOpensInNewTab": true
-          },
-          {
-            "path": "GENERAL/headings.md",
-            "children": []
-          }
-        ]
-      },
-      {
-        "categoryName": "LISTS",
-        "isCategory": true,
-        "children": [
-          {
-            "path": "LISTS/aatrox-abilities.md",
-            "children": [
-              {
-                "path": "LISTS/aatrox-lore.md",
-                "children": [
-                  {
-                    "path": "LISTS/aatrox-build.md",
-                    "children": [
-                      {
-                        "path": "LISTS/aatrox-combos.md",
-                        "children": [
-                          {
-                            "path": "LISTS/aatrox-matchups.md",
-                            "children": [
-                              {
-                                "path": "LISTS/aatrox-counters.md",
-                                "children": [
-                                  {
-                                    "path": "LISTS/aatrox-synergies.md",
-                                    "children": []
-                                  }
-                                ]
-                              }
-                            ]
-                          }
-                        ]
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "path": "LISTS/aatrox-guide.md",
-            "children": [],
-            "isHidden": true,
-            "isLink": true,
-            "linkTitle": "Aatrox guide (external)",
-            "linkHref": "https://www.leagueoflegends.com",
-            "linkOpensInNewTab": true
-          },
-          {
-            "path": "LISTS/bulleted-advanced.md",
-            "children": [],
-            "isHidden": false,
-            "isLink": true,
-            "linkTitle": "Bulleted lists — advanced",
-            "linkHref": "https://docs.archbee.com/blocks/bulleted",
-            "linkOpensInNewTab": true
-          },
-          {
-            "path": "LISTS/bulleted-scenarios.md",
+            "path": "ALL-BLOCKS/buttons-callouts.md",
             "children": []
           },
           {
-            "path": "LISTS/checklist-advanced.md",
+            "path": "ALL-BLOCKS/vertical-split-blocks.md",
             "children": []
           },
           {
-            "path": "LISTS/checklist-scenarios.md",
-            "children": [],
-            "isHidden": true
-          },
-          {
-            "path": "LISTS/numbered-advanced.md",
+            "path": "ALL-BLOCKS/minitasker.md",
             "children": []
           },
           {
-            "path": "LISTS/numbered-scenarios.md",
+            "path": "ALL-BLOCKS/link-grids-blocks.md",
             "children": []
           },
           {
-            "path": "LISTS/mixed-surface-lists.md",
+            "path": "ALL-BLOCKS/workflow-tabs-blocks.md",
             "children": []
-          },
-          {
-            "path": "LISTS/task-planning-checklists.md",
-            "children": []
-          },
-          {
-            "path": "LISTS/indented-outline-patterns.md",
-            "children": []
-          },
-          {
-            "path": "LISTS/roadmap-constraints-and-risks.md",
-            "children": []
-          },
-          {
-            "path": "LISTS/format-stress-tests.md",
-            "children": []
-          }
-        ]
-      },
-      {
-        "categoryName": "SCENARIOS",
-        "isCategory": true,
-        "children": [
-          {
-            "path": "SCENARIOS/checklist-scenarios.md",
-            "children": []
-          },
-          {
-            "path": "SCENARIOS/cta-scenarios.md",
-            "children": []
-          },
-          {
-            "path": "SCENARIOS/droplist-scenarios.md",
-            "children": []
-          },
-          {
-            "path": "SCENARIOS/heading-scenarios.md",
-            "children": []
-          },
-          {
-            "path": "SCENARIOS/hint-scenarios.md",
-            "children": [],
-            "isHidden": true
-          },
-          {
-            "path": "SCENARIOS/linkarray-scenarios.md",
-            "children": []
-          },
-          {
-            "path": "SCENARIOS/list-scenarios.md",
-            "children": []
-          },
-          {
-            "path": "SCENARIOS/new-list.md",
-            "children": []
-          },
-          {
-            "path": "SCENARIOS/new-table.md",
-            "children": []
-          },
-          {
-            "path": "SCENARIOS/split-scenarios.md",
-            "children": []
-          },
-          {
-            "path": "SCENARIOS/table-scenarios.md",
-            "children": []
-          },
-          {
-            "path": "SCENARIOS/table.md",
-            "children": []
-          },
-          {
-            "path": "SCENARIOS/sync-test-duplicate-a.md",
-            "children": []
-          },
-          {
-            "path": "SCENARIOS/sync-test-duplicate-b.md",
-            "children": []
-          },
-          {
-            "path": "SCENARIOS/sync-test-duplicate-a.md",
-            "children": []
-          },
-          {
-            "path": "SCENARIOS/tabs-scenarios.md",
-            "children": []
-          },
-          {
-            "path": "SCENARIOS/workflow-scenarios.md",
-            "children": [],
-            "isHidden": false,
-            "isLink": true,
-            "linkTitle": "Workflow block docs",
-            "linkHref": "https://docs.archbee.com/blocks/workflow",
-            "linkOpensInNewTab": true
           }
         ]
       },
@@ -254,6 +66,36 @@
       }
     ]
   },
+  "sites": [
+    {
+      "name": "Changelog",
+      "docsPath": "changelog",
+      "icon": "newspaper",
+      "structure": {
+        "docsTree": [
+          {
+            "path": "march-2026",
+            "name": "March 2026"
+          },
+          {
+            "path": "february-2026",
+            "name": "February 2026"
+          }
+        ]
+      }
+    }
+  ],
+  "externalLinks": [
+    {
+      "label": "Book a Demo",
+      "url": "https://archbee.com/book-demo"
+    },
+    {
+      "label": "Sign Up -> ",
+      "url": "https://app.archbee.com/signup",
+      "isPrimary": true
+    }
+  ],
   "shadowDocs": [],
   "isMain": true
 }

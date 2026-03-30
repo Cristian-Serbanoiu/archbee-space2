@@ -1,0 +1,15 @@
+---
+description: Always consult .claude/skills before Archbee docs, archbee.json, or block content
+alwaysApply: true
+---
+
+# Claude project skills
+
+Before answering or editing anything tied to **this repo’s Archbee docs**, **`archbee.json`**, or **`docs/ALL-BLOCKS/`**:
+
+1. Read **`.claude/skills/archbee-docs-space/SKILL.md`** (navigation rules, naming, quality checks).
+2. Read **`.claude/skills/archbee-docs-space/reference-blocks.md`** (block templates, Imgur URLs, slugs, fences).
+
+If other folders exist under **`.claude/skills/`**, read each relevant **`SKILL.md`** (YAML `description` tells you when it applies) before work that matches that skill.
+
+Do not invent block fences or `archbee.json` structure from memory when these files define the canonical patterns for this project.
