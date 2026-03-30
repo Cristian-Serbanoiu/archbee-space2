@@ -25,6 +25,10 @@
         "isCategory": true,
         "children": [
           {
+            "path": "ALL-BLOCKS/archbee-doc-wmGtK8kz1Z_YeHz9ZM3gu.mdx",
+            "children": []
+          },
+          {
             "path": "ALL-BLOCKS/heading-expandable-blocks.md",
             "children": []
           },
