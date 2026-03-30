@@ -64,7 +64,6 @@
         "children": [
           {
             "path": "MEDIA/file-blocks.md",
-            "name": "Files",
             "children": []
           },
           {
@@ -81,6 +80,30 @@
         "categoryName": "DEVELOPER",
         "isCategory": true,
         "children": [
+          {
+            "path": "DEVELOPER/archbee-doc-6YcmNlWAwblh4JZDnAZ0l.mdx",
+            "children": []
+          },
+          {
+            "path": "DEVELOPER/archbee-doc-Np7I5sX478l2pHoXe_Fh8.mdx",
+            "children": []
+          },
+          {
+            "path": "DEVELOPER/archbee-doc-h69z1msWAWF71CpeATAtM.mdx",
+            "children": []
+          },
+          {
+            "path": "DEVELOPER/archbee-doc-2kNfxKoZBaLeV13I-LuZw.mdx",
+            "children": []
+          },
+          {
+            "path": "DEVELOPER/archbee-doc-1aIqu70q2rDtz1kD6PmhW.mdx",
+            "children": []
+          },
+          {
+            "path": "DEVELOPER/archbee-doc-QLYn5A9pkTY4FaXPK6ss3.mdx",
+            "children": []
+          },
           {
             "path": "DEVELOPER/tex-mermaid-blocks.md",
             "children": []
