@@ -16,9 +16,9 @@
   "hasPrimaryColorLinks": true,
   "isArchbeeBrandVisible": true,
   "isPublicBackgroundEnabled": true,
-  "docsPath": "./",
+  "docsPath": "docs/",
   "structure": {
-    "summary": "NOXUS/BASIC/heading-expandable-blocks",
+    "summary": "BASIC/heading-expandable-blocks.md",
     "assets": "assets",
     "docsTree": [
       {
@@ -27,31 +27,31 @@
         "icon": "layout-grid",
         "children": [
           {
-            "path": "NOXUS/BASIC/heading-expandable-blocks",
+            "path": "BASIC/heading-expandable-blocks.md",
             "children": []
           },
           {
-            "path": "NOXUS/BASIC/checklist-list-blocks",
+            "path": "BASIC/checklist-list-blocks.md",
             "children": []
           },
           {
-            "path": "NOXUS/BASIC/table-divider-blocks",
+            "path": "BASIC/table-divider-blocks.md",
             "children": []
           },
           {
-            "path": "NOXUS/BASIC/buttons-callouts-blocks",
+            "path": "BASIC/buttons-callouts-blocks.md",
             "children": []
           },
           {
-            "path": "NOXUS/BASIC/vertical-split-blocks",
+            "path": "BASIC/vertical-split-blocks.md",
             "children": []
           },
           {
-            "path": "NOXUS/BASIC/link-grid-block",
+            "path": "BASIC/link-grid-block.md",
             "children": []
           },
           {
-            "path": "NOXUS/BASIC/workflow-tabs-blocks",
+            "path": "BASIC/workflow-tabs-blocks.md",
             "children": []
           }
         ]
@@ -62,15 +62,15 @@
         "icon": "image",
         "children": [
           {
-            "path": "NOXUS/MEDIA/file-block",
+            "path": "MEDIA/file-block.md",
             "children": []
           },
           {
-            "path": "NOXUS/MEDIA/images-embeds-blocks",
+            "path": "MEDIA/images-embeds-blocks.md",
             "children": []
           },
           {
-            "path": "NOXUS/MEDIA/map-block",
+            "path": "MEDIA/map-block.md",
             "children": []
           }
         ]
@@ -81,35 +81,35 @@
         "icon": "code",
         "children": [
           {
-            "path": "NOXUS/DEVELOPER/api-endpoint-block",
+            "path": "DEVELOPER/api-endpoint-block.md",
             "children": []
           },
           {
-            "path": "NOXUS/DEVELOPER/swagger-block",
+            "path": "DEVELOPER/swagger-block.md",
             "children": []
           },
           {
-            "path": "NOXUS/DEVELOPER/scalar-block",
+            "path": "DEVELOPER/scalar-block.md",
             "children": []
           },
           {
-            "path": "NOXUS/DEVELOPER/graphql-block",
+            "path": "DEVELOPER/graphql-block.md",
             "children": []
           },
           {
-            "path": "NOXUS/DEVELOPER/code-drawer-block",
+            "path": "DEVELOPER/code-drawer-block.md",
             "children": []
           },
           {
-            "path": "NOXUS/DEVELOPER/code-editor-block",
+            "path": "DEVELOPER/code-editor-block.md",
             "children": []
           },
           {
-            "path": "NOXUS/DEVELOPER/tex-mermaid-blocks",
+            "path": "DEVELOPER/tex-mermaid-blocks.md",
             "children": []
           },
           {
-            "path": "NOXUS/DEVELOPER/changelog-block",
+            "path": "DEVELOPER/changelog-block.md",
             "children": []
           }
         ]
@@ -126,8 +126,10 @@
   "sites": [
     {
       "name": "FRELJORD",
-      "docsPath": "./",
+      "docsPath": "FRELJORD/",
       "icon": "newspaper",
+      "hostingColor": "blue",
+      "darkHostingColor": "blue",
       "structure": {
         "docsTree": [
           {
@@ -136,15 +138,15 @@
             "icon": "calendar",
             "children": [
               {
-                "path": "FRELJORD/march-2026",
+                "path": "march-2026.md",
                 "name": "Overview"
               },
               {
-                "path": "FRELJORD/march-2026-developer-blocks",
+                "path": "march-2026-developer-blocks.md",
                 "name": "Developer Blocks Added"
               },
               {
-                "path": "FRELJORD/march-2026-media-and-layout",
+                "path": "march-2026-media-and-layout.md",
                 "name": "Media and Layout Updates"
               }
             ]
@@ -155,11 +157,11 @@
             "icon": "heart",
             "children": [
               {
-                "path": "FRELJORD/february-2026",
+                "path": "february-2026.md",
                 "name": "Overview"
               },
               {
-                "path": "FRELJORD/february-2026-template-blocks",
+                "path": "february-2026-template-blocks.md",
                 "name": "Block Templates"
               }
             ]

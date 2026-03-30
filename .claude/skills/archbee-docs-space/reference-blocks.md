@@ -4,13 +4,13 @@ When content is edited in **GitHub and synced to Archbee**, use the patterns in 
 
 For colon-nested blocks (LinkArray, VerticalSplit, etc.), **inner** lines use **fewer** colons than the **outer** wrapper.
 
-**Block taxonomy:** Archbee groups blocks into **BASIC**, **MEDIA**, and **DEVELOPER**. This repo’s markdown mirrors that (`NOXUS/BASIC/`, `NOXUS/MEDIA/`, `NOXUS/DEVELOPER/`). The full product list (including types we do not have sample docs for yet) is in **[SKILL.md](SKILL.md)** → **Block taxonomy**.
+**Block taxonomy:** Archbee groups blocks into **BASIC**, **MEDIA**, and **DEVELOPER**. This repo’s markdown mirrors that (`docs/BASIC/`, `docs/MEDIA/`, `docs/DEVELOPER/`). The full product list (including types we do not have sample docs for yet) is in **[SKILL.md](SKILL.md)** → **Block taxonomy**.
 
 ---
 
 ## GitHub sync — canonical patterns
 
-Use these in `NOXUS/BASIC/`, `NOXUS/MEDIA/`, and `NOXUS/DEVELOPER/` markdown. Showcase paths are noted for copy-paste.
+Use these in `docs/BASIC/`, `docs/MEDIA/`, and `docs/DEVELOPER/` markdown. Showcase paths are noted for copy-paste.
 
 **Filename rule:** multi-block pages use `-blocks.md`; single-block pages use `-block.md`.
 
@@ -206,7 +206,7 @@ https://i.imgur.com/S9lPyzp.jpeg
 
 ## Doc pages by category (paths and slugs for `docId` / `externalHref`)
 
-**Internal href pattern:** `/docs/<Category>/<slug>` — no `.md` in the URL. **Category** is `BASIC`, `MEDIA`, or `DEVELOPER` (matches folders under `NOXUS/`).
+**Internal href pattern:** `/docs/<Category>/<slug>` — no `.md` in the URL. **Category** is `BASIC`, `MEDIA`, or `DEVELOPER` (matches folders under `docs/` (symlink `docs/` → `docs/`)).
 
 ### BASIC
 
@@ -564,5 +564,5 @@ Minimal example:
 ## Pitfalls
 
 - **Sync duplication:** external sync can append the same file twice; if you see repeated YAML frontmatter, keep one clean copy.
-- **Fences:** mismatching colon counts breaks parsing — copy from this file or from the matching page under `NOXUS/BASIC/`, `NOXUS/MEDIA/`, or `NOXUS/DEVELOPER/`.
+- **Fences:** mismatching colon counts breaks parsing — copy from this file or from the matching page under `docs/BASIC/`, `docs/MEDIA/`, or `docs/DEVELOPER/`.
 - **Do not guess syntax:** if a block breaks, copy the exact pattern from the working showcase file in this repo first.

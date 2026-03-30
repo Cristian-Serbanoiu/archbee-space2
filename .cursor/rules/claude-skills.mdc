@@ -5,7 +5,7 @@ alwaysApply: true
 
 # Claude project skills
 
-Before answering or editing anything tied to **this repo’s Archbee docs**, **`archbee.json`**, or **`NOXUS/`** (folders **BASIC/**, **MEDIA/**, **DEVELOPER/**):
+Before answering or editing anything tied to **this repo’s Archbee docs**, **`archbee.json`**, or **`docs/`** (folders **BASIC/**, **MEDIA/**, **DEVELOPER/**):
 
 1. Read **`.claude/skills/archbee-docs-space/SKILL.md`** (navigation rules, naming, quality checks).
 2. Read **`.claude/skills/archbee-docs-space/reference-blocks.md`** — start with **GitHub sync — canonical patterns** (TeX, Mermaid, Changelog, Map, image, YouTube), then block templates, Imgur URLs, slugs.
