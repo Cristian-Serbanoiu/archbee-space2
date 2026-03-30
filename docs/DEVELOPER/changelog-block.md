@@ -1,16 +1,20 @@
 ---
 title: Changelog
 slug: changelog-blocks
-icon: {"lucideIcon":"ScrollText"}
 docTags: Revenge
-createdAt: 2026-03-30T10:00:00.000Z
-updatedAt: 2026-03-30T10:00:00.000Z
+createdAt: Mon Mar 30 2026 22:07:42 GMT+0000 (Coordinated Universal Time)
+updatedAt: Mon Mar 30 2026 22:09:12 GMT+0000 (Coordinated Universal Time)
 ---
 
-:::changelog{title="Dummy Release"}
-::changelog-item{type="added" description="ADDED"}
-::changelog-item{type="fixed" description="FIXED"}
-::changelog-item{type="improved" description="IMPROVED"}
-::changelog-item{type="broken" description="BROKEN"}
-::changelog-item{type="knownIssue" description="KNOWN ISSUE"}
+:::Changelog{title="Dummy release"}
+::ChangelogItem{type="added" description="ADDED"}
+
+::ChangelogItem{type="fixed" description="FIXED"}
+
+::ChangelogItem{type="improved" description="IMPROVED"}
+
+::ChangelogItem{type="broken" description="BROKEN"}
+
+::ChangelogItem{type="knownIssue" description="KNOWN ISSUE"}
 :::
+
