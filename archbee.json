@@ -24,7 +24,6 @@
       {
         "categoryName": "BASIC",
         "isCategory": true,
-        "icon": "layout-grid",
         "children": [
           {
             "path": "BASIC/heading-expandable-blocks.md",
@@ -59,7 +58,6 @@
       {
         "categoryName": "MEDIA",
         "isCategory": true,
-        "icon": "image",
         "children": [
           {
             "path": "MEDIA/file-block.md",
@@ -78,7 +76,6 @@
       {
         "categoryName": "DEVELOPER",
         "isCategory": true,
-        "icon": "code",
         "children": [
           {
             "path": "DEVELOPER/api-endpoint-block.md",
@@ -117,13 +114,37 @@
       {
         "categoryName": "OTHERS",
         "isCategory": true,
-        "icon": "layers",
-        "children": []
+        "children": [
+          {
+            "children": [],
+            "isLink": true,
+            "linkTitle": "External Link - Filled - Custom Icon",
+            "linkHref": "www.archbee.com",
+            "linkOpensInNewTab": false
+          },
+          {
+            "children": [],
+            "isLink": true,
+            "linkTitle": "External Link - Filled - Simple",
+            "linkHref": "www.archbee.com",
+            "linkOpensInNewTab": true
+          },
+          {
+            "children": [],
+            "isLink": true,
+            "linkTitle": "Untitled",
+            "linkHref": ""
+          },
+          {
+            "path": "OTHERS/hidden-document.mdx",
+            "children": [],
+            "isHidden": true
+          }
+        ]
       },
       {
         "categoryName": "Shadow Docs",
         "isCategory": true,
-        "icon": "moon",
         "children": [],
         "isShadowDocs": true
       }
