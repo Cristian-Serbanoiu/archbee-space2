@@ -57,28 +57,54 @@ Sidebar categories in **`archbee.json`** match **BASIC**, **MEDIA**, and **DEVEL
 
 Content authored in GitHub must use patterns Archbee’s parser recognizes. **JSX from the web editor** (`<Changelog>`, `<Map>`, `<embed>`, `<File>`) often shows **empty** after sync; use **colon directives / fences** and **fenced code** instead.
 
+### BASIC blocks
+
 | Need | Pattern | Showcase path |
 | ---- | -------- | --------------- |
+| **Headings** | `# H1`, `## H2`, `### H3` (standard markdown) | `BASIC/heading-expandable-blocks.md` |
+| **Expandable Heading** | `:::::ExpandableHeading` + heading + body + `:::::` | `BASIC/heading-expandable-blocks.md` |
+| **Checklist** | `- [ ] Item` (standard markdown) | `BASIC/checklist-list-blocks.md` |
+| **Bullet list** | `- Item` (standard markdown) | `BASIC/checklist-list-blocks.md` |
+| **Numbered list** | `1. Item` (standard markdown) | `BASIC/checklist-list-blocks.md` |
+| **Table** | Markdown `\| Col \| Col \|` pipe table, or HTML `<table>` with Archbee attrs | `BASIC/table-divider-blocks.md` |
+| **Divider** | `***` (standard markdown) | `BASIC/table-divider-blocks.md` |
+| **Button** | `:::::CtaButton{label="…" …}` + `:::::` | `BASIC/buttons-callouts-blocks.md` |
+| **Callout** | `:::::hint{type="info\|success\|warning\|danger"}` + content + `:::::` | `BASIC/buttons-callouts-blocks.md` |
+| **Vertical Split** | `:::::VerticalSplit{layout="…"}` + `::::VerticalSplitItem` children + `:::::` | `BASIC/vertical-split-blocks.md` |
+| **Minitasker** | `:::::DropList` + fenced `json` (columns/items) + `:::::` | `BASIC/vertical-split-blocks.md` |
+| **Link Grid** | `:::::LinkArray{contentSource="CUSTOM" itemsPerRow="3"}` + `::::LinkArrayItem` children + `:::::` | `BASIC/link-grid-block.md` |
+| **Workflow** | `:::::WorkflowBlock` + `::::WorkflowBlockItem` children + `:::::` | `BASIC/workflow-tabs-blocks.md` |
+| **Tabs** | `:::::Tabs` + `::::Tab{title="…"}` children + `:::::` | `BASIC/workflow-tabs-blocks.md` |
+
+### MEDIA blocks
+
+| Need | Pattern | Showcase path |
+| ---- | -------- | --------------- |
+| **Image** | `![](https://example.com/image.png)` | `MEDIA/images-embeds-blocks.md` |
+| **YouTube Video** | `:::::Embed{url="https://youtu.be/…"}` + `:::::` (fallback: `:::::Video{url="…"}` or plain YouTube URL line) | `MEDIA/images-embeds-blocks.md` |
+| **File** | `::File[]{isUploading="false"}` or `::File[]{src="…" label="…" caption}` | `MEDIA/file-block.md` |
+| **Map** | `:::::Map` + fenced `json` { center, zoom, markerPositions } + `:::::` | `MEDIA/map-block.md` |
+
+### DEVELOPER blocks
+
+| Need | Pattern | Showcase path |
+| ---- | -------- | --------------- |
+| **Code Editor** | Fenced code block (for example ` ```javascript`) | `DEVELOPER/code-editor-block.md` |
 | **TeX** | ` ```tex` … ` ``` ` | `DEVELOPER/tex-mermaid-blocks.md` |
 | **Mermaid** | ` ```mermaid` … ` ``` ` | `DEVELOPER/tex-mermaid-blocks.md` |
-| **Changelog** | `:::changelog{title="…"}` + lines `::changelog-item{type="…" description="…"}` + close `:::` | `DEVELOPER/changelog-block.md` |
-| **Map** | `:::::Map` + ` ```json` { center, zoom, markerPositions } + `:::::` | `MEDIA/map-block.md` |
-| **File** | `::File[]{isUploading="false"}` or `::File[]{src="…" label="…" caption}` | `MEDIA/file-block.md` |
-| **Image** | `![](https://example.com/image.png)` | **Images & YouTube Videos** — `MEDIA/images-embeds-blocks.md` |
-| **YouTube Video** | `:::::Embed{url="https://youtu.be/…"}` + `:::::` (fallback: `:::::Video{url="…"}` or plain YouTube URL line) | `MEDIA/images-embeds-blocks.md` |
-| **Code Editor** | Fenced code block (for example ` ```javascript`) | `DEVELOPER/code-editor-block.md` |
-| **Code Drawer** | `::::CodeDrawer{...}` + nested `:::CodeblockTabsExamples/Responses` | `DEVELOPER/code-drawer-block.md` |
-| **GraphQL (GraphiQL)** | `:::GraphiQL` + fenced `json` (`endpoint`, `query`) + `:::` | `DEVELOPER/graphql-block.md` |
-| **Scalar** | `:::::Scalar` + fenced `json` (`jsonFileLocation`, `headers`) + `:::::` | `DEVELOPER/scalar-block.md` |
-| **Swagger** | `:::::Swagger` + fenced `json` (`jsonFileLocation`, `headers`) + `:::::` | `DEVELOPER/swagger-block.md` |
+| **Code Drawer** | `::::CodeDrawer{…}` + `:::CodeblockTabsExamples` + `:::CodeblockTabsResponses` + `::::` | `DEVELOPER/code-drawer-block.md` |
+| **Changelog** | `:::Changelog{title="…"}` + `::ChangelogItem{type="…" description="…"}` + `:::` | `DEVELOPER/changelog-block.md` |
 | **API Endpoint** | `:::::ApiMethodV2` + fenced `json` (full method payload) + `:::::` | `DEVELOPER/api-endpoint-block.md` |
+| **Swagger** | `:::::Swagger` + fenced `json` (`jsonFileLocation`, `headers`) + `:::::` | `DEVELOPER/swagger-block.md` |
+| **Scalar** | `:::::Scalar` + fenced `json` (`jsonFileLocation`, `headers`) + `:::::` | `DEVELOPER/scalar-block.md` |
+| **GraphQL (GraphiQL)** | `:::GraphiQL` + fenced `json` (`endpoint`, `query`) + `:::` | `DEVELOPER/graphql-block.md` |
 
 For this repo, **do not invent syntax**. Copy from the matching showcase file under `docs/` (symlink `docs/` → `docs/`).  
 Known-safe patterns: GraphQL uses `:::GraphiQL ... :::`; Scalar/Swagger/API Endpoint use `:::::BlockName` + inner ` ```json `; Map uses the same wrapper style.
 
 **Icons:** Use only icon shapes confirmed in existing docs (`fa-solid` or known `lucideIcon` values). Avoid `fa-brands`. If tree icon/label is stale, set explicit `name` in `archbee.json` for that doc entry.
 
-**Changelog types:** `added`, `improved`, `fixed`, `broken`, `knownIssue`. **Changelog fences are lowercase** (`changelog`, `changelog-item`).
+**Changelog types:** `added`, `improved`, `fixed`, `broken`, `knownIssue`. **Changelog fences are PascalCase** (`Changelog`, `ChangelogItem`).
 
 Copy-paste templates live in **[reference-blocks.md](reference-blocks.md)** → **GitHub sync — canonical patterns**.
 

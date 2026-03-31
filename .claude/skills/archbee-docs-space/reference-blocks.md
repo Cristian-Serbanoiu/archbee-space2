@@ -14,20 +14,47 @@ Use these in `docs/BASIC/`, `docs/MEDIA/`, and `docs/DEVELOPER/` markdown. Showc
 
 **Filename rule:** multi-block pages use `-blocks.md`; single-block pages use `-block.md`.
 
+### BASIC blocks
+
+| Content | Correct pattern | Notes |
+| ------- | ---------------- | ----- |
+| **Headings** | `# H1`, `## H2`, `### H3` | Standard markdown |
+| **Expandable Heading** | `:::::ExpandableHeading` + heading + body + `:::::` | Collapsible sections |
+| **Checklist** | `- [ ] Item` | Standard markdown |
+| **Bullet list** | `- Item` | Standard markdown |
+| **Numbered list** | `1. Item` | Standard markdown |
+| **Table** | Markdown pipe table or HTML `<table>` with Archbee attrs | See HTML table section below |
+| **Divider** | `***` | Standard markdown |
+| **Button** | `:::::CtaButton{label="…" …}` + `:::::` | — |
+| **Callout** | `:::::hint{type="info\|success\|warning\|danger"}` + content + `:::::` | — |
+| **Vertical Split** | `:::::VerticalSplit{layout="…"}` + `::::VerticalSplitItem` children + `:::::` | — |
+| **Minitasker** | `:::::DropList` + fenced `json` + `:::::` | — |
+| **Link Grid** | `:::::LinkArray{contentSource="CUSTOM" itemsPerRow="3"}` + `::::LinkArrayItem` children + `:::::` | — |
+| **Workflow** | `:::::WorkflowBlock` + `::::WorkflowBlockItem` children + `:::::` | — |
+| **Tabs** | `:::::Tabs` + `::::Tab{title="…"}` children + `:::::` | — |
+
+### MEDIA blocks
+
 | Content | Correct pattern | Avoid (often blank after sync) |
 | ------- | ---------------- | ------------------------------- |
+| **Image** | Standard markdown `![](https://...)` | — |
+| **YouTube Video** | `:::::Embed{url="https://youtu.be/..."}` + `:::::` (or try `:::::Video{url="..."}` / plain URL on its own line) | `<embed url="...">` |
+| **File** | `::File[]{…}` — attrs in `{}`; use `caption` flag on downloads; `isUploading="false"` for empty slot | `<File>…</File>` |
+| **Map** | `:::::Map` + fenced `json` body + `:::::` | `<Map data="...">` |
+
+### DEVELOPER blocks
+
+| Content | Correct pattern | Avoid (often blank after sync) |
+| ------- | ---------------- | ------------------------------- |
+| **Code Editor** | Fenced code block (e.g. ` ```javascript`) | — |
 | **TeX** | Fenced code with language `tex` | — |
 | **Mermaid** | Fenced code with language `mermaid` | — |
-| **Changelog** | `:::changelog{title="..."}` … `::changelog-item{type="..." description="..."}` … `:::` | `<Changelog>` / `<ChangelogItem>` |
-| **Map** | `:::::Map` + fenced `json` body + `:::::` | `<Map data="...">` |
-| **File** | `::File[]{…}` — attrs in `{}`; use `caption` flag on downloads; `isUploading="false"` for empty slot | `<File>…</File>` |
-| **Image** | Standard markdown `![](https://...)` (section **Image**) | — |
-| **YouTube Video** | `:::::Embed{url="https://youtu.be/..."}` + `:::::` (or try `:::::Video{url="..."}` / plain URL on its own line) | `<embed url="...">` |
-| **Code Drawer** | `::::CodeDrawer{...}` with nested `:::CodeblockTabsExamples` and `:::CodeblockTabsResponses` | `<CodeDrawer>...</CodeDrawer>` |
-| **GraphQL / GraphiQL** | `:::GraphiQL` + fenced `json` + `:::` | JSX `<GraphiQL ...>` in `.md` files |
-| **Scalar** | `:::::Scalar` + fenced `json` + `:::::` | `<Scalar data="...">` |
-| **Swagger** | `:::::Swagger` + fenced `json` + `:::::` | `<Swagger data="...">` |
+| **Code Drawer** | `::::CodeDrawer{...}` with nested `:::CodeblockTabsExamples` and `:::CodeblockTabsResponses` + `::::` | `<CodeDrawer>...</CodeDrawer>` |
+| **Changelog** | `:::Changelog{title="..."}` … `::ChangelogItem{type="..." description="..."}` … `:::` | `<Changelog>` / `<ChangelogItem>` |
 | **API Endpoint** | `:::::ApiMethodV2` + fenced `json` + `:::::` | `<ApiMethodV2 data="...">` |
+| **Swagger** | `:::::Swagger` + fenced `json` + `:::::` | `<Swagger data="...">` |
+| **Scalar** | `:::::Scalar` + fenced `json` + `:::::` | `<Scalar data="...">` |
+| **GraphQL / GraphiQL** | `:::GraphiQL` + fenced `json` + `:::` | JSX `<GraphiQL ...>` in `.md` files |
 
 ### TeX
 
@@ -53,12 +80,12 @@ See `DEVELOPER/tex-mermaid-blocks.md`.
 ### Changelog
 
 ```markdown
-:::changelog{title="Release name"}
-::changelog-item{type="added" description="..."}
-::changelog-item{type="fixed" description="..."}
-::changelog-item{type="improved" description="..."}
-::changelog-item{type="broken" description="..."}
-::changelog-item{type="knownIssue" description="..."}
+:::Changelog{title="Release name"}
+::ChangelogItem{type="added" description="..."}
+::ChangelogItem{type="fixed" description="..."}
+::ChangelogItem{type="improved" description="..."}
+::ChangelogItem{type="broken" description="..."}
+::ChangelogItem{type="knownIssue" description="..."}
 :::
 ```
 
@@ -283,7 +310,7 @@ python3 -m json.tool archbee.json >/dev/null && echo OK
 | Code Drawer | `::::CodeDrawer{...}` + nested tabs sections | `DEVELOPER/code-drawer-block.md` |
 | Mermaid | Fenced code block with language `mermaid` | `DEVELOPER/tex-mermaid-blocks.md` |
 | TeX | Fenced code block with language `tex` | `DEVELOPER/tex-mermaid-blocks.md` |
-| Changelog | `:::changelog` + `::changelog-item` (lowercase) | `DEVELOPER/changelog-block.md` |
+| Changelog | `:::Changelog` + `::ChangelogItem` (PascalCase) | `DEVELOPER/changelog-block.md` |
 | GraphQL (GraphiQL) | `:::GraphiQL` + fenced `json` + `:::` | `DEVELOPER/graphql-block.md` |
 | Scalar | `:::::Scalar` + fenced `json` | `DEVELOPER/scalar-block.md` |
 | Swagger UI | `:::::Swagger` + fenced `json` | `DEVELOPER/swagger-block.md` |
@@ -296,10 +323,10 @@ python3 -m json.tool archbee.json >/dev/null && echo OK
 Same as **GitHub sync — canonical patterns** → Changelog. Full example:
 
 ```markdown
-:::changelog{title="v1.0"}
-::changelog-item{type="added" description="New feature"}
-::changelog-item{type="fixed" description="Bug fix"}
-::changelog-item{type="knownIssue" description="Known limitation"}
+:::Changelog{title="v1.0"}
+::ChangelogItem{type="added" description="New feature"}
+::ChangelogItem{type="fixed" description="Bug fix"}
+::ChangelogItem{type="knownIssue" description="Known limitation"}
 :::
 ```
 
