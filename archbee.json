@@ -115,6 +115,12 @@
         ]
       },
       {
+        "categoryName": "OTHERS",
+        "isCategory": true,
+        "icon": "layers",
+        "children": []
+      },
+      {
         "categoryName": "Shadow Docs",
         "isCategory": true,
         "icon": "moon",
