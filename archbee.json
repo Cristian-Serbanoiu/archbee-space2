@@ -5,8 +5,10 @@
   "contentLayout": "two-column",
   "publicTheme": "light",
   "faviconURL": "/public/favicon.ico",
-  "publicLogoURL": "/public/logo-light.png",
-  "darkPublicLogoURL": "/public/logo-dark.png",
+  "publicLogoURL": "/public/public-noxus/logo-light.png",
+  "darkPublicLogoURL": "/public/public-noxus/logo-dark.png",
+  "logoRedirectURL": "https://www.archbee.com",
+  "hostingTitle": "Archbee",
   "hostingColor": "red",
   "darkHostingColor": "red",
   "showReadTime": true,
@@ -16,6 +18,7 @@
   "hasPrimaryColorLinks": true,
   "isArchbeeBrandVisible": true,
   "isPublicBackgroundEnabled": true,
+  "showFullTitleInLeftNavDocsTree": true,
   "docsPath": "docs/",
   "structure": {
     "summary": "BASIC/heading-expandable-blocks.md",
@@ -154,10 +157,37 @@
   "sites": [
     {
       "name": "FRELJORD",
-      "docsPath": "FRELJORD/",
       "icon": "newspaper",
-      "hostingColor": "blue",
-      "darkHostingColor": "blue",
+      "template": "windy",
+      "contentLayout": "two-column",
+      "publicTheme": "light",
+      "faviconURL": "/public/favicon.ico",
+      "publicLogoURL": "/public/public-freljord/logo-light.png",
+      "darkPublicLogoURL": "/public/public-freljord/logo-dark.png",
+      "logoRedirectURL": "https://www.archbee.com",
+      "hostingTitle": "Archbee",
+      "hostingColor": "#159bf2",
+      "darkHostingColor": "#159bf2",
+      "showReadTime": true,
+      "showLastUpdate": true,
+      "showThemeSwitcher": true,
+      "showDocNavigationButtons": true,
+      "hasPrimaryColorLinks": true,
+      "isArchbeeBrandVisible": true,
+      "isPublicBackgroundEnabled": true,
+      "showFullTitleInLeftNavDocsTree": true,
+      "docsPath": "FRELJORD/",
+      "externalLinks": [
+        {
+          "label": "View a Demo",
+          "url": "https://archbee.com/book-demo"
+        },
+        {
+          "label": "Login -> ",
+          "url": "https://app.archbee.com/login",
+          "isPrimary": true
+        }
+      ],
       "structure": {
         "docsTree": [
           {

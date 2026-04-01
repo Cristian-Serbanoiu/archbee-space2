@@ -1,1 +1,3 @@
 .claude/settings.local.json
+.claude/skills/archbee-cli-commands/config.env
+.claude/skills/asana-tickets
