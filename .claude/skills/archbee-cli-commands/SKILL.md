@@ -12,11 +12,11 @@ This skill contains all available `archbee` CLI commands, their options, usage g
 ## Default Configuration
 
 Before building any command, read `.claude/skills/archbee-cli-commands/config.env` and substitute variables with the values from that file. Available variables:
-- `$DOC_SPACE_ID` — primary space ID
-- `$API_KEY` — API key for primary space
-- `$DOC_SPACE_GROUP_ID` — space group ID
-- `$DOC_SPACE_ID_FOR_SPACE_LINKS` — secondary space ID (used for space links)
-- `$API_KEY_FOR_DOC_SPACE_USED_FOR_SPACE_LINKS` — API key for secondary space
+- `$DOC_SPACE_ID_FIRST_SPACE` — primary space ID
+- `$API_KEY_FIRST_SPACE` — API key for primary space
+- `$DOC_SPACE_GROUP_ID_FIRST` — space group ID
+- `$DOC_SPACE_ID_SECOND_SPACE` — secondary space ID (used for space links)
+- `$API_KEY_SECOND_SPACE` — API key for secondary space
 
 If the user explicitly provides different values, use those instead. Each space has its own API key — use the correct one for the target space.
 
@@ -30,36 +30,37 @@ If the user explicitly provides different values, use those instead. Each space 
 
 | Command | Issue | Asana Ticket |
 |---|---|---|
-| `get-doc` | Fails with "Request with GET/HEAD method cannot have body" — sends body on GET request | Filed |
+| `get-doc` | ~~Fails with "Request with GET/HEAD method cannot have body"~~ — FIXED as of 2026-04-02. `--format source` returns empty output (unclear purpose). `--format html` flattens expandable headings. | Filed |
 | `delete-doc` | Returns "Not allowed" even with valid API key | Filed |
-| `search-docs` | Empty query `""` rejected by CLI parser; use `' '` (space) as workaround. Also only returns untitled/empty docs, misses titled ones | Filed |
-| `create-space` | Missing `--enable-branching-system` flag; backend requires `isBranchingSystemEnabled` but CLI doesn't expose it. Also `--doc-space-id` is confusing (only used for auth, not to create inside) | Filed |
-| `update-space` | `--protection-type` (all types) broken: "Couldn't trigger space update". `--jwt-*`, `--saml-metadata`, `--conditional-rule-id` return `{"updated": true}` but don't actually persist. Only `--hostname` and `--space-links` work | Filed |
+| `search-docs` | Empty query `""` rejected by CLI parser; use `' '` (space) as workaround. Also only returns untitled/empty docs, misses titled ones. `--parent-doc-id` doesn't filter results — non-children leak through. | Filed (`1213904574009139`) |
+| `create-space` | ~~Missing `--enable-branching-system` flag~~ — FIXED as of 2026-04-02. `--enable-llm`, `--enable-review-system`, `--doc-space-group-id` are listed as optional but backend requires them. `--doc-space-id` is confusing (only used for auth, not to create inside) | Filed |
+| `update-space` | ~~`--protection-type` all broken~~ — `None` and `Password` now WORK (2026-04-02). `Guest accounts`, `Private Accounts`, `Private Link`, `Magic Link` fail because CLI is missing required sub-options. `JWT`, `SAML`, `--conditional-rule-id` still broken ("Couldn't trigger space update"). `--hostname`, `--space-links` work. | Filed |
 | `info-openapi` | Always returns "Cannot find open api imported files" even with valid doc tree ID from sync-openapi | Filed |
+| `create-doc` | `--content` with literal `\n` doesn't parse escape sequences; entire string becomes the title, `--title` flag ignored, body empty. `--format json` crashes with "expected string, received undefined". `--sorting alphabetical` crashes with "localeCompare" error. | Filed (`1213904227098881`) |
 | `clone-space` | CLI-imported docs appear as broken/empty entries in cloned space | Filed |
-| `display-rules` | Fails with "Request with GET/HEAD method cannot have body" — same issue as get-doc | Not filed |
-| `export` | Fails with "Request with GET/HEAD method cannot have body" — same issue as get-doc | Not filed |
+| `display-rules` | ~~Fails with "Request with GET/HEAD method cannot have body"~~ — FIXED as of 2026-04-02. Returns `{ "displayRules": [] }` when no rules configured. | Not filed |
+| `export` | ~~GET-with-body bug~~ FIXED. Now broken: sends `exportThisSpaceOnly` and `exportAsLink` as strings instead of booleans. Also `--no-export-as-link` not recognized (same `--no-*` bug as upload). | Filed (`1213904983484133`) |
 
 ## Command Status Summary
 
 | Command | Status |
 |---|---|
-| `get-doc` | BROKEN |
-| `create-doc` | WORKS |
+| `get-doc` | WORKS (all formats; `source` returns empty, `html` flattens expandable headings) |
+| `create-doc` | PARTIALLY WORKS (`--format json`, `--sorting alphabetical`, `--title` with `--content` broken) |
 | `delete-doc` | BROKEN |
-| `search-docs` | PARTIALLY BROKEN |
+| `search-docs` | PARTIALLY WORKS (empty query broken, `--parent-doc-id` doesn't filter; `--query`, `--type`, `--doc-id`, `--search-only-title`, `--data-text-format` all work) |
 | `import-content` | WORKS (single file and zip) |
-| `create-space` | BROKEN (missing flag) |
-| `update-space` | PARTIALLY BROKEN (only hostname + space-links work) |
+| `create-space` | WORKS (`--enable-llm`, `--enable-review-system`, `--doc-space-group-id` are effectively required) |
+| `update-space` | PARTIALLY WORKS (`None`, `Password`, `--hostname`, `--space-links` work; JWT, SAML, conditional rules broken; other protection types need missing sub-options) |
 | `publish-space` | WORKS (PREVIEW works; PUBLISHED needs custom domain) |
 | `clone-space` | WORKS (cloned space gets its own API key) |
-| `sync-openapi` | WORKS |
+| `sync-openapi` | BROKEN (returns success but no docs created — regression) |
 | `info-openapi` | BROKEN |
-| `upload` | WORKS |
+| `upload` | PARTIALLY WORKS (`--no-public` broken) |
 | `merge-suggestion` | NOT TESTED |
 | `discard-suggestion` | NOT TESTED |
-| `export` | BROKEN |
-| `display-rules` | BROKEN |
+| `export` | BROKEN (old GET-with-body fixed, now boolean serialization bug + `--no-export-as-link` not recognized) |
+| `display-rules` | WORKS (previously broken, GET-with-body fixed) |
 
 ---
 
@@ -67,26 +68,46 @@ If the user explicitly provides different values, use those instead. Each space 
 
 Retrieve a document in markdown, html, json, or source format.
 
-**STATUS: BROKEN** — sends body on GET request.
+**STATUS: WORKS** — tested 2026-04-02. Previously broken (GET-with-body issue), now fixed.
 
 ### Required Options
 
 | Option | Description |
 |---|---|
-| `--doc-space-id <id>` | Document space ID |
-| `--api-key <key>` | API key |
-| `--doc-id <id>` | Document ID |
+| `--doc-space-id <id>` | Document space ID (required) |
+| `--api-key <key>` | API key (required) |
+| `--doc-id <id>` | Document ID (required) |
 
 ### Optional Options
 
-| Option | Description | Default |
-|---|---|---|
-| `--format <fmt>` | Output format: `markdown` \| `html` \| `json` \| `source` | `markdown` |
+| Option | Description | Default | Status |
+|---|---|---|---|
+| `--format markdown` | Returns markdown with frontmatter (title, slug, tags, dates) and Archbee block syntax (e.g. `:::ExpandableHeading`) | default | WORKS |
+| `--format html` | Returns HTML. Expandable headings are flattened — heading titles and content become plain `<h>` and `<p>` tags with no collapsible wrapper | | WORKS (lossy for expandable headings) |
+| `--format json` | Returns Archbee's internal Slate-like block JSON with types like `h1`, `expandable-heading1`, `paragraph`, etc. Each block has an `id`, `type`, `children`, and optional `data` | | WORKS |
+| `--format source` | Returns empty output (exit code 0, no error). Purpose unclear — may not be implemented for all doc types | | WORKS (empty output) |
 
-### Example
+### Notes
+
+- Invalid `--doc-id` returns "Document not found!" (exit code 1), not a crash.
+- The `markdown` format includes Archbee-specific block syntax (e.g. `:::ExpandableHeading ... :::`) which is useful for round-tripping with `create-doc`.
+- The `json` format is the richest representation — includes block IDs, nested children, and block-level data (e.g. `{ "isOpen": false }` for expandable headings).
+- The `html` format is lossy — it strips expandable heading wrappers and other Archbee-specific structures.
+
+### Examples
 
 ```bash
-archbee get-doc --doc-space-id $DOC_SPACE_ID --api-key $API_KEY --doc-id W9p74nQMtZuybpEIbjUHe
+# Get doc as markdown (default)
+archbee get-doc --doc-space-id $DOC_SPACE_ID_FIRST_SPACE --api-key $API_KEY_FIRST_SPACE --doc-id I6lnGG5rdJNHduxPuf618
+
+# Get doc as HTML
+archbee get-doc --doc-space-id $DOC_SPACE_ID_FIRST_SPACE --api-key $API_KEY_FIRST_SPACE --doc-id I6lnGG5rdJNHduxPuf618 --format html
+
+# Get doc as JSON (internal block structure)
+archbee get-doc --doc-space-id $DOC_SPACE_ID_FIRST_SPACE --api-key $API_KEY_FIRST_SPACE --doc-id I6lnGG5rdJNHduxPuf618 --format json
+
+# Get doc as source (returns empty)
+archbee get-doc --doc-space-id $DOC_SPACE_ID_FIRST_SPACE --api-key $API_KEY_FIRST_SPACE --doc-id I6lnGG5rdJNHduxPuf618 --format source
 ```
 
 ---
@@ -95,45 +116,66 @@ archbee get-doc --doc-space-id $DOC_SPACE_ID --api-key $API_KEY --doc-id W9p74nQ
 
 Create or update a document. If `--doc-id` is provided, the document is updated.
 
-**STATUS: WORKS**
+**STATUS: PARTIALLY WORKS** — tested 2026-04-02. Most options work, but `--format json`, `--sorting alphabetical`, and `--title` with `--content` have bugs.
 
 ### Required Options
 
 | Option | Description |
 |---|---|
-| `--doc-space-id <id>` | Document space ID |
-| `--api-key <key>` | API key |
-| `--content <text>` | Markdown or JSON content (required unless `--file` is used) |
+| `--doc-space-id <id>` | Document space ID (required) |
+| `--api-key <key>` | API key (required) |
+| `--content <text>` | Markdown content (required unless `--file` is used) |
 
 ### Optional Options
 
-| Option | Description | Default |
-|---|---|---|
-| `--format <fmt>` | Content format: `markdown` \| `json` | `markdown` |
-| `--doc-id <id>` | Existing document ID to update (omit to create new) | |
-| `--parent-doc-id <id>` | Parent document ID (empty string = move to root) | |
-| `--title <text>` | Document title | |
-| `--description <text>` | Document description | |
-| `--slug <text>` | URL slug | |
-| `--alias <text>` | URL alias | |
-| `--preview-img-url <url>` | Preview image URL | |
-| `--conditional-rule-id <id>` | Conditional rule ID | |
-| `--sorting <type>` | Insertion order: `alphabetical` \| `chronological` | |
-| `--hidden` | Mark document as hidden | |
-| `--file <path>` | Read content from file instead of `--content` | |
+| Option | Description | Default | Status |
+|---|---|---|---|
+| `--format markdown` | Content format: markdown | `markdown` | WORKS |
+| `--format json` | Content format: JSON (Slate block array) | | BROKEN — "Invalid input: expected string, received undefined" |
+| `--doc-id <id>` | Existing document ID to update (omit to create new). Returns `"newRecord": false` on update | | WORKS |
+| `--parent-doc-id <id>` | Parent document ID. Empty string `""` moves doc to root | | WORKS |
+| `--title <text>` | Document title | | BUGGY — when used with `--content`, the title gets set to the raw content string (with escaped `\n`) instead of the `--title` value. Use `--file` instead of `--content` to avoid this |
+| `--description <text>` | Document description | | WORKS |
+| `--slug <text>` | URL slug | | WORKS |
+| `--alias <text>` | URL alias | | WORKS |
+| `--preview-img-url <url>` | Preview image URL | | WORKS (accepted, not verified if persisted in UI) |
+| `--conditional-rule-id <id>` | Conditional rule ID | | WORKS (accepted, not verified if persisted in UI) |
+| `--sorting alphabetical` | Insert doc in alphabetical order | | BROKEN — "Cannot read properties of undefined (reading 'localeCompare')" |
+| `--sorting chronological` | Insert doc in chronological order | | WORKS |
+| `--hidden` | Mark document as hidden (excluded from search by default, but found with `--doc-id` filter) | | WORKS |
+| `--file <path>` | Read content from file instead of `--content`. File must exist on disk | | WORKS |
 
-### Known Issue
+### Known Issues
 
-The contributor/author on created docs shows as "Dragos" instead of the API key owner.
+- The contributor/author on created docs shows as "Dragos" in the UI instead of the API key owner. The `createdBy` field in search results is empty.
+- `--title` with `--content`: The title is set to the raw `--content` string instead of the `--title` value. Workaround: use `--file` to provide content instead of `--content`.
+- `--format json`: Crashes with "expected string, received undefined". Cannot create docs using JSON block format via CLI.
+- `--sorting alphabetical`: Crashes with "localeCompare" error. Only `chronological` works.
+- `get-doc --format json` on a doc created with `--hidden` returns `[]` (empty array).
 
 ### Examples
 
 ```bash
-# Create a new doc
-archbee create-doc --doc-space-id $DOC_SPACE_ID --api-key $API_KEY --title "My Doc" --file docs/BASIC/heading-expandable-blocks.md
+# Create a new doc with content inline
+archbee create-doc --doc-space-id $DOC_SPACE_ID_FIRST_SPACE --api-key $API_KEY_FIRST_SPACE --content "# My Doc"
+
+# Create a doc from a file (recommended — avoids --title bug)
+archbee create-doc --doc-space-id $DOC_SPACE_ID_FIRST_SPACE --api-key $API_KEY_FIRST_SPACE --title "My Doc" --file docs/BASIC/heading-expandable-blocks.md
+
+# Create with all working optional flags
+archbee create-doc --doc-space-id $DOC_SPACE_ID_FIRST_SPACE --api-key $API_KEY_FIRST_SPACE --file docs/BASIC/heading-expandable-blocks.md --title "My Doc" --description "A test doc" --slug "my-doc" --alias "my-doc-alias" --hidden
 
 # Update an existing doc
-archbee create-doc --doc-space-id $DOC_SPACE_ID --api-key $API_KEY --doc-id W9p74nQMtZuybpEIbjUHe --content "# Updated content"
+archbee create-doc --doc-space-id $DOC_SPACE_ID_FIRST_SPACE --api-key $API_KEY_FIRST_SPACE --doc-id m7yavx3wO7cegkO65vUSQ --content "# Updated content"
+
+# Create a child doc under a parent
+archbee create-doc --doc-space-id $DOC_SPACE_ID_FIRST_SPACE --api-key $API_KEY_FIRST_SPACE --content "# Child" --parent-doc-id m7yavx3wO7cegkO65vUSQ
+
+# Move a doc to root
+archbee create-doc --doc-space-id $DOC_SPACE_ID_FIRST_SPACE --api-key $API_KEY_FIRST_SPACE --content "# Moved" --doc-id IdQxYHFbvX-Q0g-z5uBzW --parent-doc-id ""
+
+# Insert doc in chronological order (alphabetical is broken)
+archbee create-doc --doc-space-id $DOC_SPACE_ID_FIRST_SPACE --api-key $API_KEY_FIRST_SPACE --content "# Sorted" --sorting chronological
 ```
 
 ---
@@ -155,7 +197,7 @@ Permanently delete a document by ID.
 ### Example
 
 ```bash
-archbee delete-doc --doc-space-id $DOC_SPACE_ID --api-key $API_KEY --doc-id W9p74nQMtZuybpEIbjUHe
+archbee delete-doc --doc-space-id $DOC_SPACE_ID_FIRST_SPACE --api-key $API_KEY_FIRST_SPACE --doc-id W9p74nQMtZuybpEIbjUHe
 ```
 
 ---
@@ -164,44 +206,61 @@ archbee delete-doc --doc-space-id $DOC_SPACE_ID --api-key $API_KEY --doc-id W9p7
 
 Search documents in a space. Supports word-based, AI chat, and AI retrieval search.
 
-**STATUS: PARTIALLY BROKEN** — empty query doesn't work properly.
+**STATUS: PARTIALLY WORKS** — tested 2026-04-02. Most options work, but `--parent-doc-id` doesn't filter, `--persist-search` doesn't return session IDs, and empty query is broken.
 
 ### Required Options
 
 | Option | Description |
 |---|---|
-| `--doc-space-id <id>` | Document space ID |
-| `--api-key <key>` | API key |
-| `--query <text>` | Search query (empty string should return all docs but is rejected by CLI) |
+| `--doc-space-id <id>` | Document space ID (required) |
+| `--api-key <key>` | API key (required) |
 
 ### Optional Options
 
-| Option | Description | Default |
-|---|---|---|
-| `--type <type>` | Search type: `words` \| `ai-chat` \| `ai-retrieval` | `words` |
-| `--doc-id <id>` | Return only this document | |
-| `--parent-doc-id <id>` | Return only children of this doc (`"null"` for root) | |
-| `--search-only-title` | Search only by title | |
-| `--data-text-format <fmt>` | Return dataText as: `markdown` \| `html` | |
-| `--persist-search` | Keep a SearchSession in the database | |
-| `--search-session-id <id>` | Existing SearchSession ID to continue | |
+| Option | Description | Default | Status |
+|---|---|---|---|
+| `--query <text>` | Search query. Omit or empty to return all docs | | WORKS (empty string rejected by CLI, use `' '` workaround — but only returns untitled docs) |
+| `--type words` | Word-based search with highlights | `words` | WORKS |
+| `--type ai-chat` | AI-powered search returning a `generativeAnswer` field with natural language response (~3s) | | WORKS |
+| `--type ai-retrieval` | AI-powered search returning relevant docs without generative answer (~4s) | | WORKS |
+| `--doc-id <id>` | Return only this document. Returns full `dataText` content (not just frontmatter) | | WORKS |
+| `--parent-doc-id <id>` | Supposed to return only children of this doc (`"null"` for root) | | BUGGY — doesn't strictly filter, non-children leak through |
+| `--search-only-title` | Search only by document title | | WORKS |
+| `--data-text-format markdown` | Return `dataText` as markdown with frontmatter | | WORKS |
+| `--data-text-format html` | Return `dataText` as HTML (title only, no frontmatter) | | WORKS |
+| `--persist-search` | Keep a SearchSession in the database | | UNCLEAR — `searchSessionId` returns empty `""` |
+| `--search-session-id <id>` | Existing SearchSession ID to continue | | NOT TESTABLE — no session ID available |
 
 ### Known Issues
 
 - `--query ""` is rejected by the CLI parser. Use `--query ' '` (space) as workaround.
 - Even with the workaround, only untitled/empty docs are returned. Docs with titles and content are missing.
+- `--parent-doc-id` does not strictly filter results to children of the specified parent. Non-children with matching query terms appear in results. The filter may only boost ranking rather than exclude. Filed as Asana ticket `1213904574009139`.
+- `--persist-search` returns `searchSessionId: ""` — unclear if sessions are being persisted.
 
 ### Examples
 
 ```bash
 # Word search
-archbee search-docs --doc-space-id $DOC_SPACE_ID --api-key $API_KEY --query "getting started"
+archbee search-docs --doc-space-id $DOC_SPACE_ID_FIRST_SPACE --api-key $API_KEY_FIRST_SPACE --query "getting started"
 
-# AI chat search
-archbee search-docs --doc-space-id $DOC_SPACE_ID --api-key $API_KEY --query "how do I authenticate?" --type ai-chat
+# AI chat search (returns generative answer)
+archbee search-docs --doc-space-id $DOC_SPACE_ID_FIRST_SPACE --api-key $API_KEY_FIRST_SPACE --query "Who is Darius?" --type ai-chat
+
+# AI retrieval search (returns relevant docs)
+archbee search-docs --doc-space-id $DOC_SPACE_ID_FIRST_SPACE --api-key $API_KEY_FIRST_SPACE --query "key objectives" --type ai-retrieval
+
+# Filter to single doc (returns full content in dataText)
+archbee search-docs --doc-space-id $DOC_SPACE_ID_FIRST_SPACE --api-key $API_KEY_FIRST_SPACE --query "Darius" --doc-id vA80SCuG57fQKHN1x0vkK
+
+# Search by title only
+archbee search-docs --doc-space-id $DOC_SPACE_ID_FIRST_SPACE --api-key $API_KEY_FIRST_SPACE --query "MIREL" --search-only-title
+
+# Get dataText as HTML
+archbee search-docs --doc-space-id $DOC_SPACE_ID_FIRST_SPACE --api-key $API_KEY_FIRST_SPACE --query "Darius" --data-text-format html
 
 # List all docs (workaround — results are incomplete)
-archbee search-docs --doc-space-id $DOC_SPACE_ID --api-key $API_KEY --query ' '
+archbee search-docs --doc-space-id $DOC_SPACE_ID_FIRST_SPACE --api-key $API_KEY_FIRST_SPACE --query ' '
 ```
 
 ---
@@ -229,10 +288,10 @@ Import a markdown file or zip archive of markdown files as new documents.
 
 ```bash
 # Import a single markdown file
-archbee import-content --doc-space-id $DOC_SPACE_ID --api-key $API_KEY --file docs/BASIC/heading-expandable-blocks.md
+archbee import-content --doc-space-id $DOC_SPACE_ID_FIRST_SPACE --api-key $API_KEY_FIRST_SPACE --file docs/BASIC/heading-expandable-blocks.md
 
 # Import a zip of markdown files (preserves folder structure)
-archbee import-content --doc-space-id $DOC_SPACE_ID --api-key $API_KEY --file /tmp/archbee-docs.zip
+archbee import-content --doc-space-id $DOC_SPACE_ID_FIRST_SPACE --api-key $API_KEY_FIRST_SPACE --file /tmp/archbee-docs.zip
 ```
 
 ---
@@ -241,33 +300,40 @@ archbee import-content --doc-space-id $DOC_SPACE_ID --api-key $API_KEY --file /t
 
 Create a new space. The new space inherits the API key.
 
-**STATUS: BROKEN** — missing `--enable-branching-system` flag required by backend.
+**STATUS: WORKS** — tested 2026-04-02. Previously broken (missing `--enable-branching-system`), now fixed.
 
 ### Required Options
 
 | Option | Description |
 |---|---|
-| `--doc-space-id <id>` | Document space ID (for auth only, not the parent) |
-| `--api-key <key>` | API key |
+| `--doc-space-id <id>` | An existing space ID with an API key (required, for auth only — not the parent) |
+| `--api-key <key>` | API key (required) |
 
-### Optional Options
+### Optional Options (effectively required by backend)
 
-| Option | Description | Default |
-|---|---|---|
-| `--name <text>` | Space name | |
-| `--enable-llm` | Enable AI features | |
-| `--enable-review-system` | Enable review system | |
-| `--doc-space-group-id <id>` | Space group ID to add this space to | |
+| Option | Description | Default | Status |
+|---|---|---|---|
+| `--name <text>` | Space name | | WORKS |
+| `--enable-llm` | Enable AI features | | WORKS — listed as optional but backend requires it |
+| `--enable-review-system` | Enable review system | | WORKS — listed as optional but backend requires it |
+| `--enable-branching-system` | Enable branching/versioning system | | WORKS — previously missing, now fixed |
+| `--doc-space-group-id <id>` | Space group ID to add this space to | | WORKS — listed as optional but backend requires it |
 
-### Known Issues
+### Notes
 
-- Backend requires `isBranchingSystemEnabled` but CLI has no `--enable-branching-system` flag.
-- `--doc-space-id` is confusingly named — it's only used for auth, not to create a space inside another space. Spaces are created in the `--doc-space-group-id`.
+- `--enable-llm`, `--enable-review-system`, and `--doc-space-group-id` are listed as optional in CLI help but the backend rejects the request without them ("Invalid input: expected boolean/string, received undefined").
+- `--doc-space-id` is confusingly named — it's only used for auth, not to create a space inside another space.
+- Returns `{ "newDocSpaceId": "<id>" }` — the new space gets its own API key (retrieve from Archbee UI).
+- CLI-created spaces are empty ("Space is empty"). Unlike UI-created spaces, they don't get an initial untitled document — you need to add docs via `create-doc` or `import-content`.
 
-### Example
+### Examples
 
 ```bash
-archbee create-space --doc-space-id $DOC_SPACE_ID --api-key $API_KEY --name "My New Space" --doc-space-group-id $DOC_SPACE_GROUP_ID --enable-llm --enable-review-system
+# Create a space with all required flags
+archbee create-space --doc-space-id $DOC_SPACE_ID_FIRST_SPACE --api-key $API_KEY_FIRST_SPACE --name "My New Space" --doc-space-group-id $DOC_SPACE_GROUP_ID_FIRST --enable-llm --enable-review-system
+
+# Create with branching enabled
+archbee create-space --doc-space-id $DOC_SPACE_ID_FIRST_SPACE --api-key $API_KEY_FIRST_SPACE --name "Branching Space" --doc-space-group-id $DOC_SPACE_GROUP_ID_FIRST --enable-llm --enable-review-system --enable-branching-system
 ```
 
 ---
@@ -276,37 +342,44 @@ archbee create-space --doc-space-id $DOC_SPACE_ID --api-key $API_KEY --name "My 
 
 Update space settings including access control, hostname, and space links.
 
-**STATUS: PARTIALLY BROKEN** — only `--hostname` and `--space-links` work.
+**STATUS: PARTIALLY WORKS** — tested 2026-04-02. `None`, `Password`, `--hostname`, `--space-links` work. JWT, SAML, conditional rules broken. Other protection types need sub-options the CLI doesn't expose.
 
 ### Required Options
 
 | Option | Description |
 |---|---|
-| `--doc-space-id <id>` | Document space ID |
-| `--api-key <key>` | API key |
+| `--doc-space-id <id>` | Document space ID (required) |
+| `--api-key <key>` | API key (required) |
 
 ### Optional Options
 
 | Option | Description | Default | Status |
 |---|---|---|---|
-| `--protection-type <type>` | Access type: `None` \| `Password` \| `Guest accounts` \| `Private Accounts` \| `Private Link` \| `Magic Link` \| `JWT` \| `SAML` | | BROKEN |
-| `--password <text>` | Password (when protection-type is Password) | | BROKEN |
-| `--hostname <domain>` | Custom hostname (e.g. docs.example.com) | | WORKS (needs DNS CNAME) |
-| `--hostname-path <path>` | Path component for hostname | | WORKS (required with --hostname) |
-| `--jwt-validation-type <type>` | JWT validation: `JWT-Secret` \| `JWT-KeySet` | | BROKEN (false success) |
-| `--jwt-secret <text>` | JWT secret | | BROKEN (false success) |
-| `--jwt-key-url <url>` | JWT key URL | | BROKEN (false success) |
-| `--jwt-redirect-url <url>` | JWT redirect URL | | BROKEN (false success) |
-| `--saml-metadata <xml>` | SAML metadata XML | | BROKEN (false success) |
-| `--conditional-rule-id <id>` | Conditional rule ID | | BROKEN (false success) |
-| `--space-links <json>` | JSON array of space links | | WORKS |
+| `--protection-type None` | No access control | | WORKS — confirmed persists in UI |
+| `--protection-type Password` | Password protection (use with `--password`) | | WORKS — confirmed persists in UI |
+| `--protection-type "Guest accounts"` | Guest account access | | FAILS — CLI missing required `publicGuestAccounts` sub-option |
+| `--protection-type "Private Accounts"` | Private account access | | FAILS — CLI missing required `publicPrivateAccounts` sub-option |
+| `--protection-type "Private Link"` | Private link access | | FAILS — CLI missing required `privateLinkTokens` sub-option |
+| `--protection-type "Magic Link"` | Magic link access | | FAILS — CLI missing required `publicMagicLinkAccounts` sub-option |
+| `--protection-type JWT` | JWT authentication | | BROKEN — "Couldn't trigger space update" even with all JWT options |
+| `--protection-type SAML` | SAML authentication | | BROKEN — "Couldn't trigger space update" even with `--saml-metadata` |
+| `--password <text>` | Password (when protection-type is Password) | | WORKS |
+| `--hostname <domain>` | Custom hostname (e.g. docs.example.com) | | WORKS (needs DNS CNAME to proxy.archbee.com) |
+| `--hostname-path <path>` | Path component for hostname | | WORKS |
+| `--jwt-validation-type <type>` | JWT validation: `JWT-Secret` \| `JWT-KeySet` | | BROKEN — "Couldn't trigger space update" |
+| `--jwt-secret <text>` | JWT secret | | BROKEN |
+| `--jwt-key-url <url>` | JWT key URL | | BROKEN |
+| `--jwt-redirect-url <url>` | JWT redirect URL | | BROKEN |
+| `--saml-metadata <xml>` | SAML metadata XML | | BROKEN |
+| `--conditional-rule-id <id>` | Conditional rule ID | | BROKEN — "Couldn't trigger space update" |
+| `--space-links <json>` | JSON array of space links | | WORKS — confirmed persists in UI |
 
 ### Space Links Format
 
-Each link object MUST include `docSpaceId` (undocumented but required):
+Each link object MUST include `docSpaceId`:
 
 ```bash
-archbee update-space --doc-space-id $DOC_SPACE_ID --api-key $API_KEY \
+archbee update-space --doc-space-id $DOC_SPACE_ID_FIRST_SPACE --api-key $API_KEY_FIRST_SPACE \
   --space-links '[{"label":"Space 01","url":"","docSpaceId":"<space-id-1>"},{"label":"Space 02","url":"","docSpaceId":"<space-id-2>"}]'
 ```
 
@@ -315,12 +388,18 @@ After updating space links, you must **publish both spaces** for the links to ta
 ### Examples
 
 ```bash
-# Set custom hostname (requires CNAME to proxy.archbee.com)
-archbee update-space --doc-space-id $DOC_SPACE_ID --api-key $API_KEY --hostname docs.example.com --hostname-path "/"
+# Set custom hostname
+archbee update-space --doc-space-id $DOC_SPACE_ID_FIRST_SPACE --api-key $API_KEY_FIRST_SPACE --hostname g12.aiurlabs.com --hostname-path cli-space-01-edited
 
-# Set space links (both spaces need this + publish after)
-archbee update-space --doc-space-id $DOC_SPACE_ID --api-key $API_KEY \
-  --space-links '[{"label":"Space 01","url":"","docSpaceId":"0dr55HycrBQLOo0IwVeKW"},{"label":"Space 02","url":"","docSpaceId":"8mUx-Y8tosy1ijIqpaV8-"}]'
+# Set protection to Password
+archbee update-space --doc-space-id $DOC_SPACE_ID_FIRST_SPACE --api-key $API_KEY_FIRST_SPACE --protection-type Password --password "mypassword"
+
+# Reset protection to None
+archbee update-space --doc-space-id $DOC_SPACE_ID_FIRST_SPACE --api-key $API_KEY_FIRST_SPACE --protection-type None
+
+# Set space links
+archbee update-space --doc-space-id $DOC_SPACE_ID_FIRST_SPACE --api-key $API_KEY_FIRST_SPACE \
+  --space-links '[{"label":"Space 01","url":"","docSpaceId":"hYiQO-fZULb1p_6VLXw2N"},{"label":"Space 02","url":"","docSpaceId":"q0ZvgbbJ6RsHgWjvdFcVF"}]'
 ```
 
 ---
@@ -350,10 +429,10 @@ Publish documents from a space.
 
 ```bash
 # Publish to preview
-archbee publish-space --doc-space-id $DOC_SPACE_ID --api-key $API_KEY --environment PREVIEW
+archbee publish-space --doc-space-id $DOC_SPACE_ID_FIRST_SPACE --api-key $API_KEY_FIRST_SPACE --environment PREVIEW
 
 # Publish to production (requires custom domain)
-archbee publish-space --doc-space-id $DOC_SPACE_ID --api-key $API_KEY --environment PUBLISHED
+archbee publish-space --doc-space-id $DOC_SPACE_ID_FIRST_SPACE --api-key $API_KEY_FIRST_SPACE --environment PUBLISHED
 ```
 
 ---
@@ -386,7 +465,7 @@ Clone a space into a target space group.
 ### Example
 
 ```bash
-archbee clone-space --doc-space-id $DOC_SPACE_ID --api-key $API_KEY --target-space-group-id $DOC_SPACE_GROUP_ID
+archbee clone-space --doc-space-id $DOC_SPACE_ID_FIRST_SPACE --api-key $API_KEY_FIRST_SPACE --target-space-group-id $DOC_SPACE_GROUP_ID_FIRST
 ```
 
 ---
@@ -438,16 +517,16 @@ Sync an OpenAPI document with a new or existing API reference tree.
 
 ```bash
 # Sync a new OpenAPI spec with intro page
-archbee sync-openapi --doc-space-id $DOC_SPACE_ID --api-key $API_KEY --file ~/Downloads/petstore-swagger.json --create-intro
+archbee sync-openapi --doc-space-id $DOC_SPACE_ID_FIRST_SPACE --api-key $API_KEY_FIRST_SPACE --file ~/Downloads/petstore-swagger.json --create-intro
 
 # Sync with language examples
-archbee sync-openapi --doc-space-id $DOC_SPACE_ID --api-key $API_KEY --file api-spec.yaml --create-intro --language-examples "curl,python,javascript"
+archbee sync-openapi --doc-space-id $DOC_SPACE_ID_FIRST_SPACE --api-key $API_KEY_FIRST_SPACE --file api-spec.yaml --create-intro --language-examples "curl,python,javascript"
 
 # Update an existing API reference tree with a new spec version
-archbee sync-openapi --doc-space-id $DOC_SPACE_ID --api-key $API_KEY --file api-spec.json --doc-tree-id M6eF_mzK2K9Fag31kqt89
+archbee sync-openapi --doc-space-id $DOC_SPACE_ID_FIRST_SPACE --api-key $API_KEY_FIRST_SPACE --file api-spec.json --doc-tree-id M6eF_mzK2K9Fag31kqt89
 
 # Import a Postman collection
-archbee sync-openapi --doc-space-id $DOC_SPACE_ID --api-key $API_KEY --file collection.json --type postman
+archbee sync-openapi --doc-space-id $DOC_SPACE_ID_FIRST_SPACE --api-key $API_KEY_FIRST_SPACE --file collection.json --type postman
 ```
 
 ---
@@ -469,7 +548,7 @@ Get info of an existing OpenAPI tree.
 ### Example
 
 ```bash
-archbee info-openapi --doc-space-id $DOC_SPACE_ID --api-key $API_KEY --doc-tree-id M6eF_mzK2K9Fag31kqt89
+archbee info-openapi --doc-space-id $DOC_SPACE_ID_FIRST_SPACE --api-key $API_KEY_FIRST_SPACE --doc-tree-id M6eF_mzK2K9Fag31kqt89
 ```
 
 ---
@@ -478,27 +557,37 @@ archbee info-openapi --doc-space-id $DOC_SPACE_ID --api-key $API_KEY --doc-tree-
 
 Upload a single file to the File Manager.
 
-**STATUS: WORKS** — returns file URL and metadata.
+**STATUS: PARTIALLY WORKS** — tested 2026-04-02. Upload works, but `--no-public` is broken.
 
 ### Required Options
 
 | Option | Description |
 |---|---|
-| `--doc-space-id <id>` | Document space ID |
-| `--api-key <key>` | API key |
-| `--file <path>` | Path to file to upload |
+| `--doc-space-id <id>` | Document space ID (required) |
+| `--api-key <key>` | API key (required) |
+| `--file <path>` | Path to file to upload (required) |
 
 ### Optional Options
 
-| Option | Description | Default |
-|---|---|---|
-| `--public` | Make the file publicly accessible | `true` |
-| `--no-public` | Make the file private | |
+| Option | Description | Default | Status |
+|---|---|---|---|
+| `--public` | Make the file publicly accessible | `true` | WORKS |
+| `--no-public` | Make the file private | | BROKEN — "Unknown option '--no-public'" even though `--help` lists it. Filed as Asana ticket `1213904657476090` |
 
-### Example
+### Notes
+
+- Returns file metadata: `id`, `name`, `src` (S3 URL), `isPublic`, `type`, `createdAt`
+- All uploads are forced public since `--no-public` doesn't work
+- `--public false` also doesn't work ("Unexpected argument 'false'")
+
+### Examples
 
 ```bash
-archbee upload --doc-space-id $DOC_SPACE_ID --api-key $API_KEY --file ./image.png
+# Upload a public image (default)
+archbee upload --doc-space-id $DOC_SPACE_ID_FIRST_SPACE --api-key $API_KEY_FIRST_SPACE --file ./image.png
+
+# Upload with explicit --public flag
+archbee upload --doc-space-id $DOC_SPACE_ID_FIRST_SPACE --api-key $API_KEY_FIRST_SPACE --file ./image.png --public
 ```
 
 ---
@@ -520,7 +609,7 @@ Merge a suggestion document into the base document.
 ### Example
 
 ```bash
-archbee merge-suggestion --doc-space-id $DOC_SPACE_ID --api-key $API_KEY --doc-id SUGGEST-abc123
+archbee merge-suggestion --doc-space-id $DOC_SPACE_ID_FIRST_SPACE --api-key $API_KEY_FIRST_SPACE --doc-id SUGGEST-abc123
 ```
 
 ---
@@ -542,7 +631,7 @@ Discard and delete a suggestion document without merging.
 ### Example
 
 ```bash
-archbee discard-suggestion --doc-space-id $DOC_SPACE_ID --api-key $API_KEY --doc-id SUGGEST-abc123
+archbee discard-suggestion --doc-space-id $DOC_SPACE_ID_FIRST_SPACE --api-key $API_KEY_FIRST_SPACE --doc-id SUGGEST-abc123
 ```
 
 ---
@@ -571,7 +660,7 @@ Export team documentation as a signed S3 URL.
 ### Example
 
 ```bash
-archbee export --doc-space-id $DOC_SPACE_ID --api-key $API_KEY --team-id myteam123 --export-this-space-only
+archbee export --doc-space-id $DOC_SPACE_ID_FIRST_SPACE --api-key $API_KEY_FIRST_SPACE --team-id myteam123 --export-this-space-only
 ```
 
 ---
@@ -593,5 +682,5 @@ List display rules for an organization.
 ### Example
 
 ```bash
-archbee display-rules --doc-space-id $DOC_SPACE_ID --api-key $API_KEY --team-id myteam123
+archbee display-rules --doc-space-id $DOC_SPACE_ID_FIRST_SPACE --api-key $API_KEY_FIRST_SPACE --team-id myteam123
 ```
