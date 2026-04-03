@@ -47,14 +47,14 @@ If the user explicitly provides different values, use those instead. Each space 
 |---|---|
 | `get-doc` | WORKS (all formats; `source` returns empty, `html` flattens expandable headings) |
 | `create-doc` | PARTIALLY WORKS (`--format json`, `--sorting alphabetical`, `--title` with `--content` broken) |
-| `delete-doc` | BROKEN |
+| `delete-doc` | WORKS (previously broken, "Not allowed" fixed) |
 | `search-docs` | PARTIALLY WORKS (empty query broken, `--parent-doc-id` doesn't filter; `--query`, `--type`, `--doc-id`, `--search-only-title`, `--data-text-format` all work) |
 | `import-content` | WORKS (single file and zip) |
 | `create-space` | WORKS (`--enable-llm`, `--enable-review-system`, `--doc-space-group-id` are effectively required) |
 | `update-space` | PARTIALLY WORKS (`None`, `Password`, `--hostname`, `--space-links` work; JWT, SAML, conditional rules broken; other protection types need missing sub-options) |
 | `publish-space` | WORKS (PREVIEW works; PUBLISHED needs custom domain) |
 | `clone-space` | WORKS (cloned space gets its own API key) |
-| `sync-openapi` | BROKEN (returns success but no docs created — regression) |
+| `sync-openapi` | WORKS (earlier failure was transient; docs now created correctly) |
 | `info-openapi` | BROKEN |
 | `upload` | PARTIALLY WORKS (`--no-public` broken) |
 | `merge-suggestion` | NOT TESTED |
