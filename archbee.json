@@ -29,6 +29,10 @@
         "isCategory": true,
         "children": [
           {
+            "path": "BASIC/test.mdx",
+            "children": []
+          },
+          {
             "path": "BASIC/heading-expandable-blocks.md",
             "children": []
           },
@@ -121,7 +125,6 @@
           {
             "children": [],
             "isLink": true,
-            "icon": "🙂",
             "linkTitle": "External Link - Filled - Custom Icon",
             "linkHref": "www.archbee.com",
             "linkOpensInNewTab": false
