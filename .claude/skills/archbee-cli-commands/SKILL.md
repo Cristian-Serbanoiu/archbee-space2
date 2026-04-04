@@ -11,7 +11,7 @@ This skill contains all available `archbee` CLI commands, their options, usage g
 
 ## Default Configuration
 
-Before building any command, read `.claude/skills/archbee-cli-commands/config.env` and substitute variables with the values from that file. Available variables:
+Before building any command, read `.claude/skills/archbee-cli-commands/.env` and substitute variables with the values from that file. Available variables:
 - `$DOC_SPACE_ID_FIRST_SPACE` — primary space ID
 - `$API_KEY_FIRST_SPACE` — API key for primary space
 - `$DOC_SPACE_GROUP_ID_FIRST` — space group ID
@@ -34,7 +34,7 @@ If the user explicitly provides different values, use those instead. Each space 
 | `delete-doc` | Returns "Not allowed" even with valid API key | Filed |
 | `search-docs` | Empty query `""` rejected by CLI parser; use `' '` (space) as workaround. Also only returns untitled/empty docs, misses titled ones. `--parent-doc-id` doesn't filter results — non-children leak through. | Filed (`1213904574009139`) |
 | `create-space` | ~~Missing `--enable-branching-system` flag~~ — FIXED as of 2026-04-02. `--enable-llm`, `--enable-review-system`, `--doc-space-group-id` are listed as optional but backend requires them. `--doc-space-id` is confusing (only used for auth, not to create inside) | Filed |
-| `update-space` | ~~`--protection-type` all broken~~ — `None` and `Password` now WORK (2026-04-02). `Guest accounts`, `Private Accounts`, `Private Link`, `Magic Link` fail because CLI is missing required sub-options. `JWT`, `SAML`, `--conditional-rule-id` still broken ("Couldn't trigger space update"). `--hostname`, `--space-links` work. | Filed |
+| `update-space` | ~~`--protection-type` all broken~~ — `None`, `Password`, `Guest accounts`, `Private Accounts`, `Private Link`, `Magic Link`, `SAML` all WORK (2026-04-03). `JWT` still broken ("Couldn't trigger space update" with `JWT-Secret`; `JWT-KeySet` rejects URLs). `--conditional-rule-id` still broken. `--hostname`, `--space-links` work. | Filed |
 | `info-openapi` | Always returns "Cannot find open api imported files" even with valid doc tree ID from sync-openapi | Filed |
 | `create-doc` | `--content` with literal `\n` doesn't parse escape sequences; entire string becomes the title, `--title` flag ignored, body empty. `--format json` crashes with "expected string, received undefined". `--sorting alphabetical` crashes with "localeCompare" error. | Filed (`1213904227098881`) |
 | `clone-space` | CLI-imported docs appear as broken/empty entries in cloned space | Filed |
@@ -43,24 +43,153 @@ If the user explicitly provides different values, use those instead. Each space 
 
 ## Command Status Summary
 
+### Local Development
+| Command | Status |
+|---|---|
+| `dev` | NOT TESTED — starts local preview server |
+| `new` | NOT TESTED — scaffolds new documentation project |
+| `update` | NOT TESTED — updates CLI to latest version |
+
+### Validation
+| Command | Status |
+|---|---|
+| `validate` | NOT TESTED — validates config and doc structure |
+| `broken-links` | NOT TESTED — checks for broken internal links |
+
+### Documents
 | Command | Status |
 |---|---|
 | `get-doc` | WORKS (all formats; `source` returns empty, `html` flattens expandable headings) |
 | `create-doc` | PARTIALLY WORKS (`--format json`, `--sorting alphabetical`, `--title` with `--content` broken) |
 | `delete-doc` | BROKEN |
-| `search-docs` | PARTIALLY WORKS (empty query broken, `--parent-doc-id` doesn't filter; `--query`, `--type`, `--doc-id`, `--search-only-title`, `--data-text-format` all work) |
+| `search-docs` | PARTIALLY WORKS (empty query broken, `--parent-doc-id` completely ignored; `--query`, `--type`, `--doc-id`, `--search-only-title`, `--data-text-format` all work) |
 | `import-content` | WORKS (single file and zip) |
-| `create-space` | WORKS (`--enable-llm`, `--enable-review-system`, `--doc-space-group-id` are effectively required) |
-| `update-space` | PARTIALLY WORKS (`None`, `Password`, `--hostname`, `--space-links` work; JWT, SAML, conditional rules broken; other protection types need missing sub-options) |
+
+### Spaces
+| Command | Status |
+|---|---|
+| `create-space` | PARTIALLY WORKS (space creation works; `--enable-llm`, `--enable-branching-system` silently ignored; spaces always empty — no initial untitled doc) |
+| `update-space` | PARTIALLY WORKS (`None`, `Password`, `Guest accounts`, `Private Accounts`, `Private Link`, `Magic Link`, `SAML`, `--hostname`, `--space-links` work; JWT and conditional rules still broken) |
 | `publish-space` | WORKS (PREVIEW works; PUBLISHED needs custom domain) |
 | `clone-space` | WORKS (cloned space gets its own API key) |
-| `sync-openapi` | BROKEN (returns success but no docs created — regression) |
-| `info-openapi` | BROKEN |
-| `upload` | PARTIALLY WORKS (`--no-public` broken) |
+
+### OpenAPI
+| Command | Status |
+|---|---|
+| `sync-openapi` | WORKS — creates full API reference tree with categories per tag |
+| `info-openapi` | BROKEN — always "Cannot find open api imported files" |
+
+### Files & Suggestions
+| Command | Status |
+|---|---|
+| `upload` | WORKS (`--private` flag replaces old broken `--no-public`) |
 | `merge-suggestion` | NOT TESTED |
 | `discard-suggestion` | NOT TESTED |
-| `export` | BROKEN (old GET-with-body fixed, now boolean serialization bug + `--no-export-as-link` not recognized) |
+
+### Team
+| Command | Status |
+|---|---|
+| `export` | BROKEN (boolean serialization bug — `exportThisSpaceOnly` and `exportAsLink` sent as strings) |
 | `display-rules` | WORKS (previously broken, GET-with-body fixed) |
+
+---
+
+## `archbee dev`
+
+Start the local documentation preview server.
+
+**STATUS: NOT TESTED**
+
+### Options
+
+| Option | Description | Default |
+|---|---|---|
+| `--port, -p <number>` | Port number | `3000` |
+| `--no-open` | Do not open browser automatically | |
+| `--cwd <path>` | Working directory | current directory |
+
+### Example
+
+```bash
+archbee dev
+archbee dev --port 4000 --no-open
+```
+
+---
+
+## `archbee new`
+
+Scaffold a new Archbee documentation project.
+
+**STATUS: NOT TESTED**
+
+### Arguments
+
+| Argument | Description |
+|---|---|
+| `<directory>` | Project directory name (required) |
+
+### Example
+
+```bash
+archbee new my-docs
+```
+
+---
+
+## `archbee update`
+
+Update the Archbee CLI to the latest version.
+
+**STATUS: NOT TESTED**
+
+### Example
+
+```bash
+archbee update
+```
+
+---
+
+## `archbee validate`
+
+Validate config file and documentation structure. Checks that config parses correctly, all navigation docs exist, and reports orphaned files not referenced in navigation.
+
+**STATUS: NOT TESTED**
+
+### Options
+
+| Option | Description | Default |
+|---|---|---|
+| `--cwd <path>` | Working directory | current directory |
+
+### Example
+
+```bash
+archbee validate
+archbee validate --cwd /path/to/docs
+```
+
+---
+
+## `archbee broken-links`
+
+Scan documentation files for broken internal links. Checks that all markdown links and JSX href attributes point to existing documents.
+
+**STATUS: NOT TESTED**
+
+### Options
+
+| Option | Description | Default |
+|---|---|---|
+| `--cwd <path>` | Working directory | current directory |
+
+### Example
+
+```bash
+archbee broken-links
+archbee broken-links --cwd /path/to/docs
+```
 
 ---
 
@@ -300,7 +429,7 @@ archbee import-content --doc-space-id $DOC_SPACE_ID_FIRST_SPACE --api-key $API_K
 
 Create a new space. The new space inherits the API key.
 
-**STATUS: WORKS** — tested 2026-04-02. Previously broken (missing `--enable-branching-system`), now fixed.
+**STATUS: PARTIALLY WORKS** — retested 2026-04-03. Space creation works but `--enable-llm`, `--enable-branching-system` flags are silently ignored (don't take effect in UI). Spaces are always created empty (no initial untitled document).
 
 ### Required Options
 
@@ -309,19 +438,19 @@ Create a new space. The new space inherits the API key.
 | `--doc-space-id <id>` | An existing space ID with an API key (required, for auth only — not the parent) |
 | `--api-key <key>` | API key (required) |
 
-### Optional Options (effectively required by backend)
+### Optional Options
 
 | Option | Description | Default | Status |
 |---|---|---|---|
-| `--name <text>` | Space name | | WORKS |
-| `--enable-llm` | Enable AI features | | WORKS — listed as optional but backend requires it |
-| `--enable-review-system` | Enable review system | | WORKS — listed as optional but backend requires it |
-| `--enable-branching-system` | Enable branching/versioning system | | WORKS — previously missing, now fixed |
-| `--doc-space-group-id <id>` | Space group ID to add this space to | | WORKS — listed as optional but backend requires it |
+| `--name <text>` | Space name | | WORKS — effectively required (backend rejects without it) |
+| `--enable-llm` | Enable AI features | | BROKEN — accepted but silently ignored, AI stays inactive in UI |
+| `--enable-review-system` | Enable review system | | NOT VERIFIED — no longer required, unclear if it takes effect |
+| `--enable-branching-system` | Enable branching/versioning system | | BROKEN — accepted but silently ignored, Edit Mode stays "Free Edits" in UI |
+| `--doc-space-group-id <id>` | Space group ID to add this space to | | WORKS — effectively required (backend rejects without it) |
 
 ### Notes
 
-- `--enable-llm`, `--enable-review-system`, and `--doc-space-group-id` are listed as optional in CLI help but the backend rejects the request without them ("Invalid input: expected boolean/string, received undefined").
+- `--name` and `--doc-space-group-id` are effectively required (backend rejects without them). `--enable-llm` and `--enable-review-system` are no longer required but `--enable-llm` and `--enable-branching-system` are silently ignored — they don't actually enable those features.
 - `--doc-space-id` is confusingly named — it's only used for auth, not to create a space inside another space.
 - Returns `{ "newDocSpaceId": "<id>" }` — the new space gets its own API key (retrieve from Archbee UI).
 - CLI-created spaces are empty ("Space is empty"). Unlike UI-created spaces, they don't get an initial untitled document — you need to add docs via `create-doc` or `import-content`.
@@ -342,7 +471,7 @@ archbee create-space --doc-space-id $DOC_SPACE_ID_FIRST_SPACE --api-key $API_KEY
 
 Update space settings including access control, hostname, and space links.
 
-**STATUS: PARTIALLY WORKS** — tested 2026-04-02. `None`, `Password`, `--hostname`, `--space-links` work. JWT, SAML, conditional rules broken. Other protection types need sub-options the CLI doesn't expose.
+**STATUS: PARTIALLY WORKS** — retested 2026-04-03. `None`, `Password`, `Guest accounts`, `Private Accounts`, `Private Link`, `Magic Link`, `SAML` all work. `JWT` still broken. `--conditional-rule-id` still broken. `--hostname`, `--space-links` work.
 
 ### Required Options
 
@@ -357,20 +486,25 @@ Update space settings including access control, hostname, and space links.
 |---|---|---|---|
 | `--protection-type None` | No access control | | WORKS — confirmed persists in UI |
 | `--protection-type Password` | Password protection (use with `--password`) | | WORKS — confirmed persists in UI |
-| `--protection-type "Guest accounts"` | Guest account access | | FAILS — CLI missing required `publicGuestAccounts` sub-option |
-| `--protection-type "Private Accounts"` | Private account access | | FAILS — CLI missing required `publicPrivateAccounts` sub-option |
-| `--protection-type "Private Link"` | Private link access | | FAILS — CLI missing required `privateLinkTokens` sub-option |
-| `--protection-type "Magic Link"` | Magic link access | | FAILS — CLI missing required `publicMagicLinkAccounts` sub-option |
+| `--protection-type "Guest accounts"` | Guest account access (use with `--guest-accounts`) | | WORKS |
+| `--protection-type "Private Accounts"` | Private account access (use with `--private-accounts`) | | WORKS |
+| `--protection-type "Private Link"` | Private link access (use with `--private-link-tokens`) | | WORKS |
+| `--protection-type "Magic Link"` | Magic link access (use with `--magic-link-accounts`) | | WORKS |
 | `--protection-type JWT` | JWT authentication | | BROKEN — "Couldn't trigger space update" even with all JWT options |
-| `--protection-type SAML` | SAML authentication | | BROKEN — "Couldn't trigger space update" even with `--saml-metadata` |
+| `--protection-type SAML` | SAML authentication (use with `--saml-metadata` and `--saml-entity-id`) | | WORKS |
 | `--password <text>` | Password (when protection-type is Password) | | WORKS |
+| `--guest-accounts <json>` | JSON array of guest accounts: `[{"email":"...","password":"..."}]` | | WORKS |
+| `--private-accounts <json>` | JSON array of private accounts: `[{"email":"..."}]` | | WORKS |
+| `--private-link-tokens <json>` | JSON array of private link tokens: `[{"description":"...","env":"...","token":"..."}]` | | WORKS |
+| `--magic-link-accounts <json>` | JSON array of magic link accounts: `[{"email":"..."}]` | | WORKS |
+| `--saml-entity-id <id>` | SAML entity ID | | WORKS |
 | `--hostname <domain>` | Custom hostname (e.g. docs.example.com) | | WORKS (needs DNS CNAME to proxy.archbee.com) |
 | `--hostname-path <path>` | Path component for hostname | | WORKS |
 | `--jwt-validation-type <type>` | JWT validation: `JWT-Secret` \| `JWT-KeySet` | | BROKEN — "Couldn't trigger space update" |
 | `--jwt-secret <text>` | JWT secret | | BROKEN |
 | `--jwt-key-url <url>` | JWT key URL | | BROKEN |
 | `--jwt-redirect-url <url>` | JWT redirect URL | | BROKEN |
-| `--saml-metadata <xml>` | SAML metadata XML | | BROKEN |
+| `--saml-metadata <xml>` | SAML metadata XML or URL | | WORKS |
 | `--conditional-rule-id <id>` | Conditional rule ID | | BROKEN — "Couldn't trigger space update" |
 | `--space-links <json>` | JSON array of space links | | WORKS — confirmed persists in UI |
 
@@ -396,6 +530,21 @@ archbee update-space --doc-space-id $DOC_SPACE_ID_FIRST_SPACE --api-key $API_KEY
 
 # Reset protection to None
 archbee update-space --doc-space-id $DOC_SPACE_ID_FIRST_SPACE --api-key $API_KEY_FIRST_SPACE --protection-type None
+
+# Set Guest accounts
+archbee update-space --doc-space-id $DOC_SPACE_ID_FIRST_SPACE --api-key $API_KEY_FIRST_SPACE --protection-type "Guest accounts" --guest-accounts '[{"email":"guest@example.com","password":"guest123"}]'
+
+# Set Private Accounts
+archbee update-space --doc-space-id $DOC_SPACE_ID_FIRST_SPACE --api-key $API_KEY_FIRST_SPACE --protection-type "Private Accounts" --private-accounts '[{"email":"user1@example.com"},{"email":"user2@example.com"}]'
+
+# Set Private Link
+archbee update-space --doc-space-id $DOC_SPACE_ID_FIRST_SPACE --api-key $API_KEY_FIRST_SPACE --protection-type "Private Link" --private-link-tokens '[{"description":"Test token","env":"preview","token":"my-secret-token"}]'
+
+# Set Magic Link
+archbee update-space --doc-space-id $DOC_SPACE_ID_FIRST_SPACE --api-key $API_KEY_FIRST_SPACE --protection-type "Magic Link" --magic-link-accounts '[{"email":"user@example.com"}]'
+
+# Set SAML
+archbee update-space --doc-space-id $DOC_SPACE_ID_FIRST_SPACE --api-key $API_KEY_FIRST_SPACE --protection-type SAML --saml-metadata "https://your-idp.com/saml/metadata" --saml-entity-id "app.archbee.com/PUBLISHED-$DOC_SPACE_ID_FIRST_SPACE"
 
 # Set space links
 archbee update-space --doc-space-id $DOC_SPACE_ID_FIRST_SPACE --api-key $API_KEY_FIRST_SPACE \
@@ -557,7 +706,7 @@ archbee info-openapi --doc-space-id $DOC_SPACE_ID_FIRST_SPACE --api-key $API_KEY
 
 Upload a single file to the File Manager.
 
-**STATUS: PARTIALLY WORKS** — tested 2026-04-02. Upload works, but `--no-public` is broken.
+**STATUS: WORKS** — retested 2026-04-03. Upload works, `--private` flag replaces old broken `--no-public`.
 
 ### Required Options
 
@@ -571,14 +720,12 @@ Upload a single file to the File Manager.
 
 | Option | Description | Default | Status |
 |---|---|---|---|
-| `--public` | Make the file publicly accessible | `true` | WORKS |
-| `--no-public` | Make the file private | | BROKEN — "Unknown option '--no-public'" even though `--help` lists it. Filed as Asana ticket `1213904657476090` |
+| `--private` | Upload as private file (isPublic: false) | public | WORKS |
 
 ### Notes
 
 - Returns file metadata: `id`, `name`, `src` (S3 URL), `isPublic`, `type`, `createdAt`
-- All uploads are forced public since `--no-public` doesn't work
-- `--public false` also doesn't work ("Unexpected argument 'false'")
+- Use `--private` to upload as private (isPublic: false). Default is public
 
 ### Examples
 
@@ -586,8 +733,8 @@ Upload a single file to the File Manager.
 # Upload a public image (default)
 archbee upload --doc-space-id $DOC_SPACE_ID_FIRST_SPACE --api-key $API_KEY_FIRST_SPACE --file ./image.png
 
-# Upload with explicit --public flag
-archbee upload --doc-space-id $DOC_SPACE_ID_FIRST_SPACE --api-key $API_KEY_FIRST_SPACE --file ./image.png --public
+# Upload a private file
+archbee upload --doc-space-id $DOC_SPACE_ID_FIRST_SPACE --api-key $API_KEY_FIRST_SPACE --file ./image.png --private
 ```
 
 ---
@@ -640,7 +787,7 @@ archbee discard-suggestion --doc-space-id $DOC_SPACE_ID_FIRST_SPACE --api-key $A
 
 Export team documentation as a signed S3 URL.
 
-**STATUS: BROKEN** — same GET-with-body issue as `get-doc`.
+**STATUS: BROKEN** — retested 2026-04-03. Sends `exportThisSpaceOnly` and `exportAsLink` as strings instead of booleans. All combinations fail.
 
 ### Required Options
 
@@ -652,15 +799,15 @@ Export team documentation as a signed S3 URL.
 
 ### Optional Options
 
-| Option | Description | Default |
-|---|---|---|
-| `--export-this-space-only` | Export only this space | `false` |
-| `--no-export-as-link` | Return raw data instead of a link | |
+| Option | Description | Default | Status |
+|---|---|---|---|
+| `--export-this-space-only` | Export only this space | `false` | BROKEN — boolean sent as string |
+| `--export-as-link` | Return a signed URL instead of raw data | `true` | BROKEN — boolean sent as string |
 
 ### Example
 
 ```bash
-archbee export --doc-space-id $DOC_SPACE_ID_FIRST_SPACE --api-key $API_KEY_FIRST_SPACE --team-id myteam123 --export-this-space-only
+archbee export --doc-space-id $DOC_SPACE_ID_FIRST_SPACE --api-key $API_KEY_FIRST_SPACE --team-id $ORGANIZATION_TEAM_ID --export-this-space-only
 ```
 
 ---
@@ -682,5 +829,5 @@ List display rules for an organization.
 ### Example
 
 ```bash
-archbee display-rules --doc-space-id $DOC_SPACE_ID_FIRST_SPACE --api-key $API_KEY_FIRST_SPACE --team-id myteam123
+archbee display-rules --doc-space-id $DOC_SPACE_ID_FIRST_SPACE --api-key $API_KEY_FIRST_SPACE --team-id $ORGANIZATION_TEAM_ID
 ```
